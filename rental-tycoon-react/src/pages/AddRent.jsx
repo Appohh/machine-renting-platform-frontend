@@ -2,56 +2,89 @@ import { useState } from 'react'
 import RentService from '../services/RentService';
 
 
-function AddRent() {
-
-    const createRent = () => {
-        RentService.createRent(formData).then(data => console.log(data)).catch(data => console.log("fail"))
-    }
-
-    const [formData, setFormData] = useState({
-        productId: '',
-        customerId: 1,
-        start: '',
-        end: '',
-        address: '',
-        city: '',
-        total: 1,
-        discount: 1,
-        paid: 1,
+function CreateRent() {
+    // State to hold the form data
+    const [newRentData, setNewRentData] = useState({
+      customerId: '',
+      address: '',
+      city: '',
+      total: '',
+      timestamp: '',
+      discount: '',
+      paid: '',
     });
-
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        setFormData({
-            ...formData,
-            [name]: value,
+  
+    // Function to handle form input changes
+    const handleInputChange = (e) => {
+      const { name, value } = e.target;
+      setNewRentData({ ...newRentData, [name]: value });
+    };
+  
+    // Function to handle form submission
+    const handleFormSubmit = async (e) => {
+      e.preventDefault();
+  
+      try {
+        // Call the createRent service
+        const createdRent = await RentService.createRent(newRentData);
+  
+        console.log('Rent created successfully:', createdRent);
+  
+        //reset the form data after successful submission
+        setNewRentData({
+          customerId: '',
+          address: '',
+          city: '',
+          total: '',
+          timestamp: '',
+          discount: '',
+          paid: '',
         });
+      } catch (error) {
+        // Handle errors (e.g., show an error message)
+        console.error('Error creating rent:', error);
+      }
     };
-
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        console.log('Form data submitted:', formData);
-        createRent();
-    };
-
+  
     return (
-        <>
-            <h1>Add rent</h1>
-            <form className='form' onSubmit={handleSubmit}>
-                <select name="productId" value={formData.productId} onChange={handleChange}>
-                    <option value="" disabled selected>Select a building machine</option>
-                    <option value="1">Type 1 Building Machine</option>
-                    <option value="2">Type 2 Building Machine</option>
-                    <option value="3">Type 3 Building Machine</option>
-                </select>
-                <input placeholder='From' type="date" name="start" value={formData.start} onChange={handleChange} />
-                <input placeholder='Until' type="date" name="end" value={formData.end} onChange={handleChange} />
-                <input placeholder='Address' type="text" name="address" value={formData.address} onChange={handleChange} />
-                <input placeholder='City' type="text" name="city" value={formData.city} onChange={handleChange} />
-                <button type="submit">Submit</button>
-            </form>
-        </>
-    )
-}
+      <div>
+        <h1>Create Rent</h1>
+        <form onSubmit={handleFormSubmit}>
+            <label>Customer ID:</label>
+            <input
+            type="text"
+            name="customerId"
+            value={newRentData.customerId}
+            onChange={handleInputChange}
+            />
 
-export default AddRent
+            <label>Address:</label>
+            <input
+                type="text"
+                name="address"
+                value={newRentData.address}
+                onChange={handleInputChange}
+            />
+
+            <label>City:</label>
+            <input
+                type="text"
+                name="city"
+                value={newRentData.city}
+                onChange={handleInputChange}
+            />
+
+            <label>Total:</label>
+            <input
+                type="text"
+                name="total"
+                value={newRentData.total}
+                onChange={handleInputChange}
+            />
+          <button type="submit">Create Rent</button>
+        </form>
+      </div>
+    );
+  }
+  
+  export default CreateRent;
