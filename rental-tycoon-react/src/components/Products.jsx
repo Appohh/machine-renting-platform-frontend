@@ -5,7 +5,7 @@ function Products({ product }) {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    if (product && Array.isArray(product.files) && post.files.length > 0) {
+    if (product && Array.isArray(product.files) && product.files.length > 0) {
         setProducts(post.files);
     } else {
         setProducts([]);
@@ -18,7 +18,6 @@ function Products({ product }) {
         {products.map((files, index) => {
           const isImage = files.type.startsWith("image/");
           const isVideo = files.type.startsWith("video/");
-
           return (
             <div key={index}>
               {isImage ? (

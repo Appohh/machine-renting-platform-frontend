@@ -1,7 +1,7 @@
 import { Route, Routes, BrowserRouter as Router } from "react-router-dom";
 import Home from './pages/Home';
 import AddRent from './pages/AddRent';
-import SearchPage from "./pages/SearchPAGE";
+import SearchPage from "./pages/SearchPage";
 import '../src/App.css';
 import CreateMachine from './pages/CreateMachine';
 

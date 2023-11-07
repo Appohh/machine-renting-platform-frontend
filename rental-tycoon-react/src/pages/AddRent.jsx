@@ -3,7 +3,6 @@ import RentService from '../services/RentService';
 
 
 function CreateRent() {
-    // State to hold the form data
     const [newRentData, setNewRentData] = useState({
       customerId: '',
       address: '',
@@ -14,23 +13,19 @@ function CreateRent() {
       paid: '',
     });
   
-    // Function to handle form input changes
     const handleInputChange = (e) => {
       const { name, value } = e.target;
       setNewRentData({ ...newRentData, [name]: value });
     };
   
-    // Function to handle form submission
     const handleFormSubmit = async (e) => {
       e.preventDefault();
   
       try {
-        // Call the createRent service
         const createdRent = await RentService.createRent(newRentData);
   
         console.log('Rent created successfully:', createdRent);
   
-        //reset the form data after successful submission
         setNewRentData({
           customerId: '',
           address: '',
@@ -41,7 +36,6 @@ function CreateRent() {
           paid: '',
         });
       } catch (error) {
-        // Handle errors (e.g., show an error message)
         console.error('Error creating rent:', error);
       }
     };
