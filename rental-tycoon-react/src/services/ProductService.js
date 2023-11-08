@@ -39,30 +39,29 @@ function CreateMachine(newMachineData) {
 
     const getProducts = async (name) => {
       const response = await axios.get(`${hostname}/${instanceOf}/${name}`);
-      const products = response.data;
+      const products = response.data.products;
     
       for (let product of products) {
-        if (products.files && products.files.length > 0) {
+        if (product.files && product.files.length > 0) {
           const updatedFiles = [];
-          for (let product of products.files) {
+          for (let file  of product.files) {
             try {
-              const fileResponse = await axios.get(`${hostname}/api/files/${product.id}/${files.url}`, { responseType: 'blob' });
+              const fileResponse = await axios.get(`${hostname}/api/files/${product.id}/${file.fileUrl}`, { responseType: 'blob' });
     
-              const blob = new Blob([fileResponse.data], { type: content.type });
+              const blob = new Blob([fileResponse.data], { type: file.type });
               const objectURL = URL.createObjectURL(blob);
     
               const updatedContentItem = {
                 url: objectURL,
-                type: content.type,
+                type: file.type,
               };
     
-              updatedContent.push(updatedContentItem);
+              updatedFiles.push(updatedContentItem);
             } catch (error) {
-              console.error(`Failed to retrieve file: ${content.url}`);
+              console.error(`Failed to retrieve file: ${file.fileUrl}`);
             }
           }
-    
-          product.files = updatedContent;
+          product.files = updatedFiles;
         }
       }
     
