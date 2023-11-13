@@ -39,6 +39,7 @@ function CreateMachine(newMachineData) {
 
     const getProducts = async (name) => {
       const response = await axios.get(`${hostname}/${instanceOf}/${name}`);
+      console.log("zwans", response)
       const products = response.data.products;
     
       for (let product of products) {

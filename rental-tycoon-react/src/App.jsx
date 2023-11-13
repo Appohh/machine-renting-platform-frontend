@@ -1,9 +1,9 @@
 import { Route, Routes, BrowserRouter as Router } from "react-router-dom";
 import Home from './pages/Home';
 import AddRent from './pages/AddRent';
-import SearchPage from "./pages/SearchPage";
 import '../src/App.css';
 import CreateMachine from './pages/CreateMachine';
+import ProductPage from './pages/ProductPage'
 import logo from './assets/react.svg'
 
 
@@ -26,7 +26,7 @@ function App() {
               <Route path="/" element={<Home />} />
               <Route path="/addRent" element={<AddRent />} />
               <Route path="/addMachine" element={<CreateMachine />} />
-              <Route path="/search" element={<SearchPage />} />
+              <Route path="/ProductPage/:productId" element={<ProductPage />} />
             </Routes>
           </div>
         </Router>
