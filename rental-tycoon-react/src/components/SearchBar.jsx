@@ -8,18 +8,22 @@ function SearchBar() {
   const navigate = useNavigate();
 
   const fetchUserProducts = () => {
-    productService.getProducts(SearchProduct)
+    if (SearchProduct.length >= 1){
+      productService.getProducts(SearchProduct)
       .then((response) => {
         if (response) {
             setSearchResults(response);
-          } else {
-            setSearchResults([]);
-          }
+          } 
       })
       .catch((error) => {
         setSearchResults([]);
       });
-  };
+    }
+    else {
+      setSearchResults([]);
+    }
+    };
+   
 
   return (
     <>
