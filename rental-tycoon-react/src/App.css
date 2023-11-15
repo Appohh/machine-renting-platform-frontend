@@ -170,3 +170,20 @@ input[type="date"] {
   height: 11vw;
   background: gray;
 }
+
+.search-results {
+  position: absolute;
+  top: 75%;
+  width: 72%;
+  color: #ffffffcf;
+  background: #020a4d;
+  font-weight: 900;
+  padding: 8px;
+  box-sizing: border-box;
+}
+
+.search-results div:hover {
+  background: #9ea6e2;
+  cursor: pointer;
+  transition: 0.5s;
+}

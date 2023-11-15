@@ -37,7 +37,6 @@ function SearchBar() {
             fetchUserProducts();
           }}
         />
-      </form>
       <div className="search-results">
           {searchResults.map((products) => (
             <div
@@ -48,6 +47,7 @@ function SearchBar() {
             </div>
           ))}
         </div>
+      </form>
     </>
   );
 }
