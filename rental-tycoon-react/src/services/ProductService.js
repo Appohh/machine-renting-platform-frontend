@@ -69,7 +69,52 @@ function CreateMachine(newMachineData) {
       return products;
     }
 
+
+
+    const getProductById = async (id) => {
+      try {
+        const response = await axios.get(`${hostname}/${instanceOf}/product/${id}`);
+        const product = response.data; // Assuming the response directly contains the product details
+        console.log("Product by ID:", product);
+    
+        // Assuming you want to handle files as well
+        if (product.files && product.files.length > 0) {
+          const updatedFiles = [];
+          for (let file of product.files) {
+            try {
+              const fileResponse = await axios.get(`${hostname}/api/files/${product.id}/${file.fileUrl}`, { responseType: 'blob' });
+    
+              const blob = new Blob([fileResponse.data], { type: file.type });
+              const objectURL = URL.createObjectURL(blob);
+    
+              const updatedContentItem = {
+                url: objectURL,
+                type: file.type,
+              };
+    
+              updatedFiles.push(updatedContentItem);
+            } catch (error) {
+              console.error(`Failed to retrieve file: ${file.fileUrl}`);
+            }
+          }
+          product.files = updatedFiles;
+        }
+    
+        return product;
+      } catch (error) {
+        console.error(`Error getting product by ID (${id}):`, error);
+        throw error;
+      }
+    };
+
+
+
+
+
+
+
 export default {
     CreateMachine,
-    getProducts
+    getProducts,
+    getProductById
 }

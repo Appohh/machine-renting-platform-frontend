@@ -1,39 +1,33 @@
 import axios from "axios";
 
-const hostname = 'http://localhost:8080'
+const hostname = 'http://localhost:8080';
 
 function createRentFormData(newRentData) {
-    const formData = new FormData();
+  const formData = new FormData();
+
+  formData.append('customerId', newRentData.customerId);
+  formData.append('address', newRentData.address);
+  formData.append('city', newRentData.city);
+  formData.append('total', newRentData.total);
+  formData.append('timestamp', newRentData.timestamp);
+  formData.append('discount', newRentData.discount);
+  formData.append('paid', newRentData.paid);
   
-    formData.append('customerId', newRentData.customerId);
-  
-    formData.append('address', newRentData.address);
-  
-    formData.append('city', newRentData.city); 
-    
-    formData.append('total', newRentData.total);
+  const rowsJson = JSON.stringify(newRentData.rows);
+  formData.append('rows', rowsJson); 
+  return formData;
+}
 
-    formData.append('timestamp', newRentData.timestamp);
-
-    formData.append('discount', newRentData.discount);
-
-    formData.append('paid', newRentData.paid)
-  
-    return formData;
-  }
-
-  function createRent(newRentData) {
-    const formData = createRentFormData(newRentData);
-    return axios.post(`${hostname}/rent`, formData)
-      .then(response => response.data)
-      .catch(error => {
-        console.error('Error creating post:', error);
-        throw error; 
-      });
-  }
-
-
+function createRent(newRentData) {
+  const formData = createRentFormData(newRentData);
+  return axios.post(`${hostname}/rent`, formData)
+    .then(response => response.data)
+    .catch(error => {
+      console.error('Error creating rent:', error);
+      throw error;
+    });
+}
 
 export default {
-    createRent
-}
+  createRent
+};
