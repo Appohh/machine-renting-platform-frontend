@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import ProductService from './ProductService';
 import RentService from './RentService';
 
-const ExampleComponent = () => {
+const RentComponent = () => {
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [customerId, setCustomerId] = useState('');
   const [address, setAddress] = useState('');
@@ -109,4 +109,4 @@ const ExampleComponent = () => {
   );
 };
 
-export default ExampleComponent;
+export default RentComponent;
