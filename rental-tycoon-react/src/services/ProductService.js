@@ -35,49 +35,61 @@ function CreateMachine(newMachineData) {
           throw error; 
         });
     }
-
-
-    const getProducts = async (name) => {
-      const response = await axios.get(`${hostname}/${instanceOf}/${name}`);
-      console.log("zwans", response)
+    const fetchAndUpdateFiles = async (productId, files) => {
+      const updatedFiles = [];
+      for (let file of files) {
+        try {
+          const fileResponse = await axios.get(`${hostname}/api/files/${productId}/${file.fileUrl}`, { responseType: 'blob' });
+          const blob = new Blob([fileResponse.data], { type: file.type });
+          const objectURL = URL.createObjectURL(blob);
+    
+          const updatedContentItem = {
+            url: objectURL,
+            type: file.type,
+          };
+    
+          updatedFiles.push(updatedContentItem);
+        } catch (error) {
+          console.error(`Failed to retrieve file: ${file.fileUrl}`);
+        }
+      }
+      return updatedFiles;
+    };
+    
+    const getMachinesByCategory = async (id) => {
+      const response = await axios.get(`${hostname}/${instanceOf}/filter/${id}`);
       const products = response.data.products;
     
       for (let product of products) {
         if (product.files && product.files.length > 0) {
-          const updatedFiles = [];
-          for (let file  of product.files) {
-            try {
-              const fileResponse = await axios.get(`${hostname}/api/files/${product.id}/${file.fileUrl}`, { responseType: 'blob' });
-    
-              const blob = new Blob([fileResponse.data], { type: file.type });
-              const objectURL = URL.createObjectURL(blob);
-    
-              const updatedContentItem = {
-                url: objectURL,
-                type: file.type,
-              };
-    
-              updatedFiles.push(updatedContentItem);
-            } catch (error) {
-              console.error(`Failed to retrieve file: ${file.fileUrl}`);
-            }
-          }
-          product.files = updatedFiles;
+          product.files = await fetchAndUpdateFiles(product.id, product.files);
         }
       }
     
       return products;
-    }
+    };
+    
+    const getProducts = async (name) => {
+      const response = await axios.get(`${hostname}/${instanceOf}/mapping/${name}`);
+      const products = response.data.products;
+    
+      for (let product of products) {
+        if (product.files && product.files.length > 0) {
+          product.files = await fetchAndUpdateFiles(product.id, product.files);
+        }
+      }
+    
+      return products;
+    };
 
-
+   
 
     const getProductById = async (id) => {
       try {
-        const response = await axios.get(`${hostname}/${instanceOf}/product/${id}`);
-        const product = response.data; // Assuming the response directly contains the product details
+        const response = await axios.get(`${hostname}/${instanceOf}/${id}`);
+        const product = response.data; 
         console.log("Product by ID:", product);
     
-        // Assuming you want to handle files as well
         if (product.files && product.files.length > 0) {
           const updatedFiles = [];
           for (let file of product.files) {
@@ -106,15 +118,9 @@ function CreateMachine(newMachineData) {
         throw error;
       }
     };
-
-
-
-
-
-
-
 export default {
     CreateMachine,
+    getMachinesByCategory,
     getProducts,
     getProductById
 }

@@ -1,13 +1,21 @@
 import { Route, Routes, BrowserRouter as Router } from "react-router-dom";
+import {useEffect } from "react";
 import Home from './pages/Home';
 import AddRent from './pages/AddRent';
 import '../src/App.css';
 import CreateMachine from './pages/CreateMachine';
 import ProductPage from './pages/ProductPage'
 import logo from './assets/react.svg'
+import CategoryService from "./services/CategoryService";
 
 
 function App() {
+  
+  useEffect(() => {
+    CategoryService.getCategories().then(response => console.log("Found categories: ", response))
+     
+  })
+
   return (
     <>
       <div className='main-wrap'>
