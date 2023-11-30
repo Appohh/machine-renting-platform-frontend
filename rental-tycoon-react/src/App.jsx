@@ -7,6 +7,7 @@ import CreateMachine from './pages/CreateMachine';
 import ProductPage from './pages/ProductPage'
 import logo from './assets/react.svg'
 import CategoryService from "./services/CategoryService";
+import { LoginSignup } from "./pages/LoginSignup";
 
 
 function App() {
@@ -27,6 +28,7 @@ function App() {
               <ul><img src={logo} alt="logo"></img></ul>
               <ul><a href="/">About</a></ul>
               <ul><a href="/">Contact</a></ul>
+              <ul><a href="/LoginSignup">Login</a></ul>
             </li>
           </div>
           <div className='content'>
@@ -35,6 +37,7 @@ function App() {
               <Route path="/addRent" element={<AddRent />} />
               <Route path="/addMachine" element={<CreateMachine />} />
               <Route path="/ProductPage/:productId" element={<ProductPage />} />
+              <Route path="/Login" element={<LoginSignup />} />
             </Routes>
           </div>
         </Router>
