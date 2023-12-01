@@ -28,7 +28,7 @@ function App() {
               <ul><img src={logo} alt="logo"></img></ul>
               <ul><a href="/">About</a></ul>
               <ul><a href="/">Contact</a></ul>
-              <ul><a href="/LoginSignup">Login</a></ul>
+              <ul><a href="/Login">Login</a></ul>
             </li>
           </div>
           <div className='content'>
