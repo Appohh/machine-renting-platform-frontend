@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import RentStep1 from '../components/RentSteps/RentStep1';
 import RentStep2 from '../components/RentSteps/RentStep2';
+import RentStep3 from '../components/RentSteps/RentStep3';
 
 const RentPage = () => {
 
@@ -50,7 +51,8 @@ const RentPage = () => {
             case 2:
                 return <RentStep2 setData={step2SetData} step2Next={step2Next} />;
             case 3:
-                return <RentStep3 products={cart} />;
+                console.log("rentdata3",rentData)
+                return <RentStep3 cart={cart} />;
             default:
                 return null;
         }
