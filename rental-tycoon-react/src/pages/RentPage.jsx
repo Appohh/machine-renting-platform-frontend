@@ -45,7 +45,8 @@ const RentPage = () => {
         const firstProduct = rentData.products.length > 0 ? rentData.products[0] : null;
         const updatedRentData = { ...rentData };
         delete updatedRentData.products;
-        updatedRentData.product = firstProduct;
+        updatedRentData.productId = firstProduct;
+        console.log("updatedRentData", updatedRentData);
         RentService2.createRent(updatedRentData).then((response) => {
             console.log(response);
             setRentStep(4);
