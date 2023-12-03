@@ -9,7 +9,7 @@ function SearchBar() {
 
   const fetchUserProducts = () => {
     if (SearchProduct.length >= 1){
-      productService.getProducts(SearchProduct)
+      productService.getProductsByName(SearchProduct)
       .then((response) => {
         if (response) {
             setSearchResults(response);

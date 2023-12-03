@@ -69,7 +69,7 @@ function CreateMachine(newMachineData) {
       return products;
     };
     
-    const getProducts = async (name) => {
+    const getProductsByName = async (name) => {
       const response = await axios.get(`${hostname}/${instanceOf}/mapping/${name}`);
       const products = response.data.products;
     
@@ -82,7 +82,23 @@ function CreateMachine(newMachineData) {
       return products;
     };
 
-   
+    async function getAllProducts() {
+      try {
+        const response = await axios.get(`${hostname}/Product`);
+        const products = response.data.products;
+    
+        for (let product of products) {
+          if (product.files && product.files.length > 0) {
+            product.files = await fetchAndUpdateFiles(product.id, product.files);
+          }
+        }
+    
+        return products;
+      } catch (error) {
+        console.error('Error Retrieving products', error);
+        throw error;
+      }
+    }
 
     const getProductById = async (id) => {
       try {
@@ -121,6 +137,7 @@ function CreateMachine(newMachineData) {
 export default {
     CreateMachine,
     getMachinesByCategory,
-    getProducts,
-    getProductById
+    getProductsByName,
+    getProductById,
+    getAllProducts
 }
