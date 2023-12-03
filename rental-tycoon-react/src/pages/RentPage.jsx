@@ -4,6 +4,8 @@ import RentStep1 from '../components/RentSteps/RentStep1';
 import RentStep2 from '../components/RentSteps/RentStep2';
 import RentStep3 from '../components/RentSteps/RentStep3';
 
+import RentService2 from '../services/RentService';
+
 const RentPage = () => {
 
     const location = useLocation();
@@ -21,7 +23,8 @@ const RentPage = () => {
     const [cart, setCart] = useState([]);
 
     useEffect(() => {
-        setCart([1, 2, 3])
+        const products = location.state.products;
+        setCart(products);
     }, []);
 
     function step1Next() {
@@ -35,12 +38,27 @@ const RentPage = () => {
 
     function step2SetData(data) {
         setRentData({ ...rentData, ...data });
-        console.log("rentdata",rentData);
+        console.log("rentdata", rentData);
+    }
+
+    function step3Next() {
+        const firstProduct = rentData.products.length > 0 ? rentData.products[0] : null;
+        const updatedRentData = { ...rentData };
+        delete updatedRentData.products;
+        updatedRentData.product = firstProduct;
+        RentService2.createRent(updatedRentData).then((response) => {
+            console.log(response);
+            setRentStep(4);
+        }).catch((error) => {
+            console.error('Error creating rent:', error);
+            setRentStep(5);
+        });
+
     }
 
     useEffect(() => {
         console.log("RentData updated:", rentData);
-      }, [rentData]);
+    }, [rentData]);
 
     const renderRentStep = () => {
         switch (rentStep) {
@@ -51,8 +69,12 @@ const RentPage = () => {
             case 2:
                 return <RentStep2 setData={step2SetData} step2Next={step2Next} />;
             case 3:
-                console.log("rentdata3",rentData)
-                return <RentStep3 cart={cart} />;
+                console.log("rentdata3", rentData)
+                return <RentStep3 cart={cart} step3Next={step3Next} />;
+            case 4:
+                return <div>Thank you for your rent!</div>;
+            case 5:
+                return <div>Something went wrong, please try again later.</div>;
             default:
                 return null;
         }

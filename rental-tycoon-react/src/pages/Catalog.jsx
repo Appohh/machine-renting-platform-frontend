@@ -1,27 +1,29 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 import ProductService from '../services/ProductService';
-
+import { useNavigate } from 'react-router-dom';
 
 const Catalog = () => {
     const [products, setProducts] = useState([]);
 
+    const navigate = useNavigate();
+
     useEffect(() => {
         ProductService.getAllProducts()
-          .then(response => setProducts(response))
-          .catch(error => {
-            console.error('Error setting products:', error);
-          });
-      }, []);
+            .then(response => setProducts(response))
+            .catch(error => {
+                console.error('Error setting products:', error);
+            });
+    }, []);
 
     function onChangeCategory(event) {
         let category = event.target.value;
         if (category === '0') {
             ProductService.getAllProducts()
-            .then(response => setProducts(response))
-            .catch(error => {
-              console.error('Error setting products:', error);
-            });
+                .then(response => setProducts(response))
+                .catch(error => {
+                    console.error('Error setting products:', error);
+                });
         } else {
             ProductService.getMachinesByCategory(category)
                 .then(response => {
@@ -55,6 +57,9 @@ const Catalog = () => {
                             <div className="product-files">
                                 {product.files.map((file, index) => (
                                     <div className="post-content" key={index}>
+                                        <div className='rent-container'>
+                                            <button onClick={() => navigate(`/rentpage`, { state: { products: [product.id] } })} className='rent-button'>Rent</button>
+                                        </div>
                                         {file.type.startsWith('image/') ? (
                                             <img src={file.url} alt={`Product File ${index}`} />
                                         ) : file.type.startsWith('video/') ? (

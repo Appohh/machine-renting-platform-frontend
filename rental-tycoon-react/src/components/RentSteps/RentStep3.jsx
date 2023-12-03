@@ -1,22 +1,25 @@
 import React from 'react';
+import { useState, useEffect } from 'react';
+import ProductService from '../../services/ProductService'
 
-const RentStep3 = ( {cart} ) => {
+const RentStep3 = ( {cart, step3Next} ) => {
     const products = [
-        { name: 'Product 1', price: 10 },
-        { name: 'Product 2', price: 20 },
-        { name: 'Product 3', price: 30 },
+
     ];
+
+    useEffect(() => {
+
+    }, []);
 
     const totalPrice = products.reduce((acc, product) => acc + product.price, 0);
 
     const handleConfirmRent = () => {
-        // Handle confirm rent logic here
+        step3Next();
     };
 
     return (
         <div>
-            <h1>Rent Step 3</h1>
-            <h2>Product Receipt</h2>
+            <h2>Rent Confirmation</h2>
             <ul>
                 {products.map((product, index) => (
                     <li key={index}>{product.name} - ${product.price}</li>
