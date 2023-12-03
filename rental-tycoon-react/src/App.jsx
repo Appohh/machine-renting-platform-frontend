@@ -8,6 +8,7 @@ import ProductPage from './pages/ProductPage'
 import logo from './assets/react.svg'
 import CategoryService from "./services/CategoryService";
 import Catalog from "./pages/Catalog";
+import RentPage from "./pages/RentPage";
 
 
 function App() {
@@ -37,6 +38,7 @@ function App() {
               <Route path="/addMachine" element={<CreateMachine />} />
               <Route path="/ProductPage/:productId" element={<ProductPage />} />
               <Route path="/catalog" element={<Catalog />} />
+              <Route path="/rentpage" element={<RentPage />} />
             </Routes>
           </div>
         </Router>
