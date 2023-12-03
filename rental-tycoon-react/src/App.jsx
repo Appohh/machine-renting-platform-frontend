@@ -7,6 +7,7 @@ import CreateMachine from './pages/CreateMachine';
 import ProductPage from './pages/ProductPage'
 import logo from './assets/react.svg'
 import CategoryService from "./services/CategoryService";
+import Catalog from "./pages/Catalog";
 
 
 function App() {
@@ -35,6 +36,7 @@ function App() {
               <Route path="/addRent" element={<AddRent />} />
               <Route path="/addMachine" element={<CreateMachine />} />
               <Route path="/ProductPage/:productId" element={<ProductPage />} />
+              <Route path="/catalog" element={<Catalog />} />
             </Routes>
           </div>
         </Router>
