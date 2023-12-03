@@ -7,13 +7,21 @@ const Catalog = () => {
     const [products, setProducts] = useState([]);
 
     useEffect(() => {
-        ProductService.getProducts(response => setProducts(response));
-    }, []);
+        ProductService.getAllProducts()
+          .then(response => setProducts(response))
+          .catch(error => {
+            console.error('Error setting products:', error);
+          });
+      }, []);
 
     function onChangeCategory(event) {
         let category = event.target.value;
         if (category === '0') {
-            ProductService.getProducts(response => setProducts(response));
+            ProductService.getAllProducts()
+            .then(response => setProducts(response))
+            .catch(error => {
+              console.error('Error setting products:', error);
+            });
         } else {
             ProductService.getMachinesByCategory(category)
                 .then(response => {
