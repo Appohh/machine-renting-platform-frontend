@@ -25,7 +25,7 @@ function App() {
           <div className='nav'>
             <li>
               <ul><a href="/">Home</a></ul>
-              <ul><a href="/">Catalog</a></ul>
+              <ul><a href="/catalog">Catalog</a></ul>
               <ul><img src={logo} alt="logo"></img></ul>
               <ul><a href="/">About</a></ul>
               <ul><a href="/">Contact</a></ul>

@@ -82,6 +82,22 @@ function CreateMachine(newMachineData) {
       return products;
     };
 
+    async function getProductByProductId(id) {
+      try{
+        const response = await axios.get(`${hostname}/${instanceOf}/${id}`);
+        const products = response.data.product;
+          if (products.files && products.files.length > 0) {
+            products.files = await fetchAndUpdateFiles(products.id, products.files);
+          }
+
+        return products;
+      }
+      catch(error) {
+        console.error('Error Retrieving product', error);
+        throw error;
+      }
+    }
+
     async function getAllProducts() {
       try {
         const response = await axios.get(`${hostname}/Product`);
@@ -139,5 +155,6 @@ export default {
     getMachinesByCategory,
     getProductsByName,
     getProductById,
+    getProductByProductId,
     getAllProducts
 }
