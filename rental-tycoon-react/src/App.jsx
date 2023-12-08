@@ -1,17 +1,28 @@
 import { Route, Routes, BrowserRouter as Router } from "react-router-dom";
+import {useEffect } from "react";
 import Home from './pages/Home';
 import AddRent from './pages/AddRent';
 import '../src/App.css';
 import CreateMachine from './pages/CreateMachine';
 import ProductPage from './pages/ProductPage'
-import NavBar from "./NavBar";
+import logo from './assets/react.svg'
+import CategoryService from "./services/CategoryService";
 import Catalog from "./pages/Catalog";
 import RentPage from "./pages/RentPage";
+<<<<<<< HEAD
 import Register from "./pages/RegisterUser";
 import LogIn from "./pages/LogIn";
+=======
+>>>>>>> parent of 57b4e5a (Added axios instance, Login page, logout, And new navBar solution)
 
 
 function App() {
+  
+  useEffect(() => {
+    CategoryService.getCategories().then(response => console.log("Found categories: ", response))
+     
+  })
+
   return (
     <>
       <div className='main-wrap'>
@@ -19,6 +30,7 @@ function App() {
           <div className='nav'>
             <li>
               <ul><a href="/">Home</a></ul>
+<<<<<<< HEAD
               <ul><a href="/">Catalog</a></ul>
               <ul><img src={logo} alt="logo"></img></ul>
               <ul><a href="/">About</a></ul>
@@ -26,10 +38,16 @@ function App() {
               <ul><a href="/Login">Login</a></ul>
             </li>
             <NavBar/>
+=======
+              <ul><a href="/catalog">Catalog</a></ul>
+              <ul><img src={logo} alt="logo"></img></ul>
+              <ul><a href="/">About</a></ul>
+              <ul><a href="/">Contact</a></ul>
+            </li>
+>>>>>>> parent of 57b4e5a (Added axios instance, Login page, logout, And new navBar solution)
           </div>
           <div className='content'>
             <Routes>
-              <Route path="/Login" element={<LoginPage/>} />
               <Route path="/" element={<Home />} />
               <Route path="/addRent" element={<AddRent />} />
               <Route path="/addMachine" element={<CreateMachine />} />
