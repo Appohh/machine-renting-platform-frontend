@@ -9,6 +9,8 @@ import logo from './assets/react.svg'
 import CategoryService from "./services/CategoryService";
 import Catalog from "./pages/Catalog";
 import RentPage from "./pages/RentPage";
+import Register from "./pages/RegisterUser";
+import LogIn from "./pages/LogIn";
 
 
 function App() {
@@ -29,6 +31,7 @@ function App() {
               <ul><img src={logo} alt="logo"></img></ul>
               <ul><a href="/">About</a></ul>
               <ul><a href="/">Contact</a></ul>
+              <ul><a href="/Login">Login</a></ul>
             </li>
           </div>
           <div className='content'>
@@ -39,6 +42,8 @@ function App() {
               <Route path="/ProductPage/:productId" element={<ProductPage />} />
               <Route path="/catalog" element={<Catalog />} />
               <Route path="/rentpage" element={<RentPage />} />
+              <Route path="/register" element={<Register/>}/>
+              <Route path="/logIn" element={<LogIn/>}/>
             </Routes>
           </div>
         </Router>
