@@ -10,21 +10,11 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@popperjs/core": "^2.11.8",
     "axios": "^1.6.0",
-    "date-fns": "^2.30.0",
-    "jwt-decode": "^3.1.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-<<<<<<< HEAD
-<<<<<<< HEAD
-    "react-router-dom": "^6.20.1"
-=======
     "react-jwt": "^1.2.0",
-=======
->>>>>>> parent of 57b4e5a (Added axios instance, Login page, logout, And new navBar solution)
     "react-router-dom": "^6.18.0"
->>>>>>> 57b4e5a2c1dc208efe6d224bfa262ea608daa1b5
   },
   "devDependencies": {
     "@types/react": "^18.2.15",
