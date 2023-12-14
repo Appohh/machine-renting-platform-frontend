@@ -1,17 +1,7 @@
 import SearchBar from '../components/SearchBar';
 import herobanner from '../assets/images/rental-services.jpg'
 
-import TokenManager from '../services/TokenManager';
-import { useNavigate } from 'react-router-dom';
-
 function Home() {
-
-  const navigate = useNavigate();
-  const claims = TokenManager.getClaims();
-  const isLoggedIn = TokenManager.getAccessToken();
-
-  
-
   return (
     <>
       <section className='hero'>

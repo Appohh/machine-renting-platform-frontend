@@ -1,4 +1,4 @@
-import axios from "axios";
+import axiosInstance from "./axiosInstance";
 
 const hostname = 'http://localhost:8080'
 
@@ -24,7 +24,7 @@ function createMachineFormData(newMachineData) {
 
 function CreateMachine(newMachineData) {
     const formData = createMachineFormData(newMachineData);
-    return axios.post(`${hostname}/${instanceOf}/machine`, formData, {
+    return axiosInstance.post(`${hostname}/${instanceOf}/machine`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
@@ -39,7 +39,7 @@ function CreateMachine(newMachineData) {
       const updatedFiles = [];
       for (let file of files) {
         try {
-          const fileResponse = await axios.get(`${hostname}/api/files/${productId}/${file.fileUrl}`, { responseType: 'blob' });
+          const fileResponse = await axiosInstance.get(`${hostname}/api/files/${productId}/${file.fileUrl}`, { responseType: 'blob' });
           const blob = new Blob([fileResponse.data], { type: file.type });
           const objectURL = URL.createObjectURL(blob);
     
@@ -57,7 +57,7 @@ function CreateMachine(newMachineData) {
     };
     
     const getMachinesByCategory = async (id) => {
-      const response = await axios.get(`${hostname}/${instanceOf}/filter/${id}`);
+      const response = await axiosInstance.get(`${hostname}/${instanceOf}/filter/${id}`);
       const products = response.data.products;
     
       for (let product of products) {
@@ -70,7 +70,7 @@ function CreateMachine(newMachineData) {
     };
     
     const getProductsByName = async (name) => {
-      const response = await axios.get(`${hostname}/${instanceOf}/mapping/${name}`);
+      const response = await axiosInstance.get(`${hostname}/${instanceOf}/mapping/${name}`);
       const products = response.data.products;
     
       for (let product of products) {
@@ -84,7 +84,7 @@ function CreateMachine(newMachineData) {
 
     async function getProductByProductId(id) {
       try{
-        const response = await axios.get(`${hostname}/${instanceOf}/${id}`);
+        const response = await axiosInstance.get(`${hostname}/${instanceOf}/${id}`);
         const products = response.data.product;
           if (products.files && products.files.length > 0) {
             products.files = await fetchAndUpdateFiles(products.id, products.files);
@@ -100,7 +100,7 @@ function CreateMachine(newMachineData) {
 
     async function getAllProducts() {
       try {
-        const response = await axios.get(`${hostname}/Product`);
+        const response = await axiosInstance.get(`${hostname}/Product`);
         const products = response.data.products;
     
         for (let product of products) {
@@ -118,7 +118,7 @@ function CreateMachine(newMachineData) {
 
     const getProductById = async (id) => {
       try {
-        const response = await axios.get(`${hostname}/${instanceOf}/${id}`);
+        const response = await axiosInstance.get(`${hostname}/${instanceOf}/${id}`);
         const product = response.data; 
         console.log("Product by ID:", product);
     
@@ -126,7 +126,7 @@ function CreateMachine(newMachineData) {
           const updatedFiles = [];
           for (let file of product.files) {
             try {
-              const fileResponse = await axios.get(`${hostname}/api/files/${product.id}/${file.fileUrl}`, { responseType: 'blob' });
+              const fileResponse = await axiosInstance.get(`${hostname}/api/files/${product.id}/${file.fileUrl}`, { responseType: 'blob' });
     
               const blob = new Blob([fileResponse.data], { type: file.type });
               const objectURL = URL.createObjectURL(blob);

@@ -10,7 +10,7 @@ function ProductPage() {
 
 
   useEffect(() => {
-    ProductService.getProducts(products.name)
+    ProductService.getAllProducts(products.name)
       .then((response) => {
         console.log('API Response:', response);
         if (response) {
