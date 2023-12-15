@@ -48,7 +48,6 @@ function UpdateProfilePage() {
         user.id,
         user.firstName,
         user.lastName,
-        user.birthDate, // assuming you have birthDate in your user object
         user.address,
         user.city,
         user.email,

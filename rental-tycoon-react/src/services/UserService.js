@@ -10,13 +10,12 @@ const getUserById = async (id) => {
   return user;
 };
 
-const updateUserDetails = async (id, firstName, lastName, birthDate, address, city, email, phone) => {
+const updateUserDetails = async (id, firstName, lastName, address, city, email, phone) => {
   try {
-    const response = await axiosInstance.post(`${hostname}/updateCustomer`, {
+    const response = await axiosInstance.post(`${hostname}/customers/updateCustomer`, {
       id,
       firstName,
       lastName,
-      birthDate,
       address,
       city,
       email,
