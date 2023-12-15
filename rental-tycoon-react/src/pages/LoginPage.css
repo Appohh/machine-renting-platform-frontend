@@ -1,0 +1,117 @@
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: linear-gradient(to right, #141e30, #243b55);
+  }
+  
+  .login-form {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+  }
+  
+  .container {
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    width: 600px;
+    background-color: #000A50;
+    padding-bottom: 30px;
+  }
+  
+  .header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 9px;
+    width: 100%;
+    margin-top: 30px;
+  }
+  
+  .text {
+    display: flex;
+    justify-content: center;
+    color: #fff;
+    font-size: 52px;
+    font-weight: 700;
+  }
+  
+  .underline {
+    width: 300px;
+    height: 6px;
+    background: #fff;
+    border-radius: 9px;
+  }
+  
+  .form-group {
+    margin-bottom: 15px;
+  }
+  
+  label {
+    display: block;
+    margin-bottom: 5px;
+    color: #333;
+  }
+  
+  input {
+    margin-left: 140px;
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 300px;
+    border-radius: 20px;
+  }
+  
+  button {
+    width: 100%;
+    padding: 10px;
+    background-color: #4c57af;
+    color: #fff;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    width: 200px;
+    margin-left: 200px;
+    margin-top: 10px;
+    
+  }
+  
+  button:hover {
+    background-color: #1e5cd8;
+  }
+  
+  .message-container {
+    margin-top: 15px;
+  }
+
+  .forgot-password {
+    padding-left: 13px;
+    margin-top: 27px;
+    color: rgb(255, 255, 255);
+    font-size: 18px;
+    font-weight: 700;
+  }
+  
+  .forgot-password span {
+    color: #115ab9;
+    cursor: pointer;
+  }
+  
+  .register {
+    padding-left: 13px;
+    margin-top: 27px;
+    color: rgb(255, 255, 255);
+    font-size: 18px;
+    font-weight: 700;
+  }
+  
+  .register span {
+    color: #115ab9;
+    cursor: pointer;
+  }
+  
