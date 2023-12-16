@@ -66,7 +66,7 @@
     border-radius: 20px;
   }
   
-  button {
+  .button-login {
     width: 100%;
     padding: 10px;
     background-color: #4c57af;
@@ -76,6 +76,7 @@
     cursor: pointer;
     transition: background-color 0.3s;
     width: 200px;
+    position: relative;
     margin-left: 200px;
     margin-top: 10px;
     

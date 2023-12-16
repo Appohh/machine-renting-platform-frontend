@@ -15,4 +15,12 @@ const rentService = {
   },
 };
 
-export default rentService;
+const getRentHistory = async (userId) => {
+  const response = await axiosInstance.get(`${BASE_URL}/rent/${userId}`);
+  const rents = response.data
+  console.log("rents: ", rents)
+}
+
+export default {
+rentService,
+getRentHistory};

@@ -59,7 +59,7 @@ function Login(){
               required
             />
           </div>
-          <button type="submit">Login</button>
+          <button className="button-login" type="submit">Login</button>
 
           <div className='forgot-password'>Forget Password? <span>Click Here!</span></div>
           <div className='register'>Don't have an account ?<span>Register</span></div>
