@@ -1,14 +1,17 @@
 import React, { useEffect, useState } from 'react';
-import RentService2 from '../services/RentService';
+import RentService2 from '../services/RentService2';
+import { useParams } from 'react-router-dom';
+import "./rentHistory.css"
 
-function RentHistory({ userId }) {
-  const [rentHistory, setRentHistory] = useState([]);
+function RentHistory() {
+  const [rentInformation, setRentInformation] = useState([]);
+  const { userId } = useParams();
 
   useEffect(() => {
     if (userId) {
       RentService2.getRentHistory(userId)
-        .then((history) => {
-          setRentHistory(history);
+        .then((response) => {
+          setRentInformation(response);
         })
         .catch((error) => {
           console.error(error);
@@ -19,7 +22,13 @@ function RentHistory({ userId }) {
 
   return (
     <div className="rent-history-page">
-      {/* Display rent history */}
+      {rentInformation.map((rentInfo, index) => (
+        <div key={index} className="rent-card">
+          <img src={rentInfo.product.files[0].url} alt="Image problem"/>
+          <p className="product-name">{rentInfo.product.name}</p>
+          <p className="rent-price">€{rentInfo.product.price}</p>
+        </div>
+      ))}
     </div>
   );
 }

@@ -33,7 +33,7 @@ function App() {
               <Route path="/rentpage" element={<RentPage />} />
               <Route path="/ProfilePage" element={<ProfilePage />}/>
               <Route path="/UpdateProfilePage" element={<UpdateProfilePage />}/>
-              <Route path="/History/:userId" element={<RentHistory/>}/>
+              <Route path="/History/:userId" element={<RentHistory />} />
             </Routes>
           </div>
         </Router>
