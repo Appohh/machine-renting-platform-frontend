@@ -18,6 +18,10 @@ function createMachineFormData(newMachineData) {
     formData.append('price', newMachineData.price);
 
     formData.append('machineSpecificField', newMachineData.machineSpecificField)
+
+    newMachineData.categoryIds.forEach((category) => {
+      formData.append('category', category);
+    });
   
     return formData;
   }

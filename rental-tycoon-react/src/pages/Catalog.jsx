@@ -7,7 +7,7 @@ const Catalog = () => {
     const [products, setProducts] = useState([]);
     const [nameFilter, setNameFilter] = useState('');
     const [categoryFilter, setCategoryFilter] = useState(0); 
-
+    const [maxPriceFilter, setMaxPriceFilter] = useState('');
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -25,9 +25,15 @@ const Catalog = () => {
     function onChangeCategory(event) {
         setCategoryFilter(event.target.value);
     }
+    function onChangeMaxPrice(event) {
+        setMaxPriceFilter(event.target.value);
+    }
 
     function applyFilters() {
-        ProductService.filterMachine(nameFilter, 10000, parseInt(categoryFilter))
+        const selectedCategory = categoryFilter === '0' ? 0 : parseInt(categoryFilter);
+        const maxPrice = maxPriceFilter ? parseFloat(maxPriceFilter) : undefined;
+
+        ProductService.filterMachine(nameFilter, maxPrice, parseInt(selectedCategory))
             .then(response => {
                 setProducts(response);
             })
@@ -44,6 +50,12 @@ const Catalog = () => {
                     placeholder="Filter by name"
                     value={nameFilter}
                     onChange={onChangeName}
+                />
+                <input
+                    type="number"
+                    placeholder="Max Price"
+                    value={maxPriceFilter}
+                    onChange={onChangeMaxPrice}
                 />
                 <select value={categoryFilter} onChange={onChangeCategory}>
                     <option value="0">All</option>

@@ -5,11 +5,13 @@ import RentStep2 from '../components/RentSteps/RentStep2';
 import RentStep3 from '../components/RentSteps/RentStep3';
 import RentService2 from '../services/RentService2';
 
+
 const RentPage = () => {
 
     const location = useLocation();
 
     const [rentStep, setRentStep] = useState(1);
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [rentData, setRentData] = useState({
         startDate: '',
         endDate: '',
@@ -24,6 +26,8 @@ const RentPage = () => {
     useEffect(() => {
         const products = location.state.products;
         setCart(products);
+        const accessToken = localStorage.getItem('accessToken');
+        setIsLoggedIn(accessToken !== null);
     }, []);
 
     function step1Next() {
@@ -61,6 +65,9 @@ const RentPage = () => {
     }, [rentData]);
 
     const renderRentStep = () => {
+        if (!isLoggedIn) {
+            return <div>You need to be logged in to rent. Please log in first.</div>;
+        }
         switch (rentStep) {
             case 0:
                 return <div>You have no items selected</div>;
