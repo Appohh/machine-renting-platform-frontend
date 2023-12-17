@@ -62,7 +62,9 @@ function Login(){
           <button className="button-login" type="submit">Login</button>
 
           <div className='forgot-password'>Forget Password? <span>Click Here!</span></div>
-          <div className='register'>Don't have an account ?<span>Register</span></div>
+          <div className='register' onClick={() => navigate('/register')}>
+        Don't have an account ? <span>Register</span>
+      </div>
             <div>
               {message && (
                   <Message isSuccess={message.isSuccess} message={message.text} />
