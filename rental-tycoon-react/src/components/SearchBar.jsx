@@ -23,7 +23,7 @@ function SearchBar() {
     else {
       setSearchResults([]);
     }
-    };
+  };
    
 
   return (
@@ -39,7 +39,8 @@ function SearchBar() {
             fetchUserProducts();
           }}
         />
-      <div className="search-results">
+      {SearchProduct.length > 0 && (
+        <div className="search-results">
           {searchResults.map((products) => (
             <div
               key={products.id}
@@ -49,6 +50,7 @@ function SearchBar() {
             </div>
           ))}
         </div>
+      )}
       </form>
     </>
   );
