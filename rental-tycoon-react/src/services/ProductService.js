@@ -150,6 +150,31 @@ function CreateMachine(newMachineData) {
         throw error;
       }
     };
+
+    const filterMachine = async (name, price, category) => {
+      try {
+          const response = await axiosInstance.get(`${hostname}/${instanceOf}/filterMachine`, {
+              params: {
+                  name: name || '', 
+                  price: price || 0,
+                  category: category || 0, 
+              },
+          });
+          const products = response.data.products;
+          for (let product of products) {
+            if (product.files && product.files.length > 0) {
+              product.files = await fetchAndUpdateFiles(product.id, product.files);
+            }
+          }
+          
+          return response.data.products; 
+      } catch (error) {
+          console.error('Error filtering products:', error);
+          throw error;
+      }
+  };
+
+
 export default {
     CreateMachine,
     getMachinesByCategory,
@@ -157,5 +182,6 @@ export default {
     getProductById,
     getProductByProductId,
     getAllProducts,
-    fetchAndUpdateFiles
+    fetchAndUpdateFiles, 
+    filterMachine
 }

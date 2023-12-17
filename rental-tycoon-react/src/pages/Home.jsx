@@ -12,6 +12,7 @@ import cat8 from '../assets/images/categories/cat8.jpg'
 import cat9 from '../assets/images/categories/cat9.jpg'
 import cat10 from '../assets/images/categories/cat10.jpg'
 import cat11 from '../assets/images/categories/cat11.jpg'
+import cat12 from '../assets/images/categories/cat12.jpg'
 
 
 
@@ -82,6 +83,11 @@ function Home() {
           <div className='category' style={{ backgroundImage: `url(${cat11})`, backgroundSize: 'cover' }}>
             <div className='category-overlay'>
               <h2>Category 11</h2>
+            </div>
+          </div>
+          <div className='category' style={{ backgroundImage: `url(${cat12})`, backgroundSize: 'cover' }}>
+            <div className='category-overlay'>
+              <h2>Category 12</h2>
             </div>
           </div>
         </div>
