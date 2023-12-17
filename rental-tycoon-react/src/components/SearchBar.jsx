@@ -29,7 +29,7 @@ function SearchBar() {
   return (
     <>
       <form className="search-container">
-      <img src={crane} alt='crane'></img>
+      <img id='crane-home' src={crane} alt='crane'></img>
       <input className='search-bar'
           type="text"
           placeholder="Search for products..."
