@@ -2,6 +2,8 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import LoginService from "../services/LoginService";
 import Message from "../components/Message";
+import './LoginPage.css';
+
 
 function Login(){
     const [email, setEmail] = useState('');
@@ -29,11 +31,16 @@ function Login(){
     };
   
     return (
+      <div className='container'>
+      <div className="header">
+        <div className="text">Login</div>
+        <div className="underline"></div>
+      </div>
       <div className="form-signInForm">
         <form onSubmit={handleLogin}>
-          <h3>Login</h3>
+          
           <div>
-            <label>Email Address:</label>
+            <label></label>
             <input
               type="email"
               placeholder='Email Address'
@@ -43,7 +50,7 @@ function Login(){
             />
           </div>
           <div>
-            <label>Password:</label>
+            <label></label>
             <input
               type="password"
               placeholder='Password'
@@ -52,13 +59,17 @@ function Login(){
               required
             />
           </div>
-          <button type="submit">Login</button>
-          <div>
+          <button className="button-login" type="submit">Login</button>
+
+          <div className='forgot-password'>Forget Password? <span>Click Here!</span></div>
+          <div className='register'>Don't have an account ?<span>Register</span></div>
+            <div>
               {message && (
                   <Message isSuccess={message.isSuccess} message={message.text} />
-              )}
-          </div>
-        </form>
+                 )}
+           </div>
+          </form>
+        </div>
       </div>
     );
   };

@@ -2,13 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { useJwt } from 'react-jwt';
 import UserService from '../services/UserService';
 import LocalStorageService from '../services/LocalStorageService';
-
+import './ProfilePage.css';
 import { useNavigate } from 'react-router-dom';
 
 function ProfilePage() {
 
   const navigate = useNavigate();
-
   const [user, setUser] = useState(null);
   const token = LocalStorageService.get();
   const { decodedToken } = useJwt(token || "");
@@ -31,6 +30,12 @@ function ProfilePage() {
   {
     navigate("/UpdateProfilePage")
   }
+
+  const handleRentHistory = () => {
+    if (user && user.id) {
+      navigate(`/History/${user.id}`); 
+    }
+  };
 
   return (
     <div className="profile-page">
@@ -55,10 +60,11 @@ function ProfilePage() {
           <input type="text" value={user.phone} readOnly />
         </div>
       )}
-
-<div className="submit" onClick={handleUpdatePage}>Update Information</div>
-
-    </div>
+      <div className="submit" onClick={handleUpdatePage}>Update Information</div>
+      <div className='See-rents' onClick={handleRentHistory}>
+          Rent History
+      </div>
+    </div>  
   );
 }
 

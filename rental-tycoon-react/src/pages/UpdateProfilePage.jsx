@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useJwt } from 'react-jwt';
 import UserService from '../services/UserService';
 import LocalStorageService from '../services/LocalStorageService';
-
+import './UpdateProfilePage.css';
 import { useNavigate } from 'react-router-dom';
 
 function UpdateProfilePage() {
@@ -48,7 +48,6 @@ function UpdateProfilePage() {
         user.id,
         user.firstName,
         user.lastName,
-        user.birthDate, // assuming you have birthDate in your user object
         user.address,
         user.city,
         user.email,

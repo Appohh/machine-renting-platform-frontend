@@ -156,5 +156,6 @@ export default {
     getProductsByName,
     getProductById,
     getProductByProductId,
-    getAllProducts
+    getAllProducts,
+    fetchAndUpdateFiles
 }

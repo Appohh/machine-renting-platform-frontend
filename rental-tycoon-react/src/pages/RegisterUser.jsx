@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './RegisterUser.css';
 import CustomerService from '../services/CustomerService';
 
-function Register() {
+function RegisterUser() {
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -19,7 +19,6 @@ function Register() {
   const [confirmPasswordError, setConfirmPasswordError] = useState("");
   const [ageError, setAgeError] = useState("");
   const [emailError, setEmailError] = useState("");
-  const [successMessgae, setSuccessMessage] = useState("")
 
   const handleChange = (name, value) => {
     setFormData({
@@ -71,7 +70,7 @@ function Register() {
 
     for (const key in formData) {
       if (formData[key] === "") {
-        alert(`Please enter your ${key}.`);
+        alert("Please enter your ${key}.");
         hasErrors = true;
       }
     }
@@ -87,7 +86,7 @@ function Register() {
     if (!hasErrors) {
       // Assuming UserService is imported and defined elsewhere
       CustomerService.registerUser(formData)
-        .then((data) => console.log("User Registered: ", data), setSuccessMessage("You are registered"))
+        .then((data) => console.log("User Registered: ", data))
         .catch((error) => console.log("Registration failed: ", error));
     }
   };
@@ -190,20 +189,14 @@ function Register() {
           />
         </div>
       </div>
-
-      {/*Incorrect statements*/}
-      {passwordError && <div className="error-message">{passwordError}</div>}
-        
-      {emailError && <div className="error-message">{emailError}</div>}
-
+{/* //dont need forgot password for register
+      <div className='forgot-password'>Forget Password? <span>Click Here!</span></div>
+       */}
       <div className='submit-container'>
         <div className="submit" onClick={handleSubmit}>Sign Up</div>
       </div>
-
-      {successMessgae && <div className="error-message">{successMessgae}</div>}
-
     </div>
   );
 }
 
-export default Register;
+export default RegisterUser;

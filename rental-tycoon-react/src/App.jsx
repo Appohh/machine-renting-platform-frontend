@@ -10,6 +10,8 @@ import RentPage from "./pages/RentPage";
 import LoginPage from "./pages/LoginPage";
 import ProfilePage from "./pages/ProfilePage";
 import UpdateProfilePage from "./pages/UpdateProfilePage";
+import RentHistory from "./pages/RentHistory";
+import RegisterUser from "./pages/RegisterUser";
 
 
 function App() {
@@ -31,6 +33,7 @@ function App() {
               <Route path="/rentpage" element={<RentPage />} />
               <Route path="/ProfilePage" element={<ProfilePage />}/>
               <Route path="/UpdateProfilePage" element={<UpdateProfilePage />}/>
+              <Route path="/History/:userId" element={<RentHistory />} />
             </Routes>
           </div>
         </Router>
