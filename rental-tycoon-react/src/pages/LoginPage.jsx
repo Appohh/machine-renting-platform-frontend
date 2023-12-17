@@ -40,7 +40,7 @@ function Login(){
         <form onSubmit={handleLogin}>
           
           <div>
-            <label>Email Address:</label>
+            <label></label>
             <input
               type="email"
               placeholder='Email Address'
@@ -50,7 +50,7 @@ function Login(){
             />
           </div>
           <div>
-            <label>Password:</label>
+            <label></label>
             <input
               type="password"
               placeholder='Password'

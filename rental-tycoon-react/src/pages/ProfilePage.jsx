@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useJwt } from 'react-jwt';
 import UserService from '../services/UserService';
 import LocalStorageService from '../services/LocalStorageService';
-
+import './ProfilePage.css';
 import { useNavigate } from 'react-router-dom';
 
 function ProfilePage() {
