@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import productService from "../services/ProductService";
 import ContentInput from '../components/ContentInput';
+import CategoryInput from '../components/CategoryInput';
 import './CreateMachine.css'
+
 
 function CreateMachine() {
   const [newMachine, setNewMachine] = useState({
@@ -9,7 +11,8 @@ function CreateMachine() {
     description: '',
     price: '',
     files:[],
-    machineSpecificField:''
+    machineSpecificField:'',
+    categoryIds: [],
   });
 
   const handleSubmit = (e) => {
@@ -21,6 +24,7 @@ function CreateMachine() {
         price: newMachine.price,
         files: newMachine.files,
         machineSpecificField: newMachine.machineSpecificField,
+        categoryIds: newMachine.categoryIds
       };
   
     productService
@@ -77,6 +81,12 @@ function CreateMachine() {
             value={newMachine.machineSpecificField}
             onChange={(e) => handleInputChange("machineSpecificField", e.target.value)}
         />
+         <CategoryInput
+                name="categoryIds"
+                value={newMachine.categoryIds}
+                handleInputChange={handleInputChange}
+            />
+
         <div>
               <button type="submit">Create Machine</button>
         </div>
