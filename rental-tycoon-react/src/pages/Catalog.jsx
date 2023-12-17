@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 const Catalog = () => {
     const [products, setProducts] = useState([]);
     const [nameFilter, setNameFilter] = useState('');
-    const [categoryFilter, setCategoryFilter] = useState(0); 
+    const [categoryFilter, setCategoryFilter] = useState(10000); 
     const [maxPriceFilter, setMaxPriceFilter] = useState('');
     const navigate = useNavigate();
 
