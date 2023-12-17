@@ -12,7 +12,7 @@ function RegisterUser() {
     address: "",
     city: "",
     phone: "",
-    birthdate: new Date(),
+
   });
 
   const [passwordError, setPasswordError] = useState("");
@@ -179,15 +179,7 @@ function RegisterUser() {
           />
         </div>
 
-        <div className="inputsreg">
-          <img src="" alt=""/>
-          <label>Birth Date</label>
-          <input 
-            type="date" 
-            value={formData.birthdate.toISOString().split('T')[0]}
-            onChange={(e) => handleChange("birthDate", new Date(e.target.value))}
-          />
-        </div>
+        
       </div>
 {/* //dont need forgot password for register
       <div className='forgot-password'>Forget Password? <span>Click Here!</span></div>
