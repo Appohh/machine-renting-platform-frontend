@@ -1,7 +1,7 @@
 import { useLocation  } from "react-router-dom";
 import React, { useEffect, useState } from 'react';
 import { useJwt } from 'react-jwt';
-import logo from './assets/react.svg'
+import logo from './assets/logop.jpg'
 import UserService from "./services/UserService";
 import LocalStorageService from "./services/LocalStorageService";
 import Logout from "./components/Logout";
@@ -33,7 +33,7 @@ function NavBar() {
       <li>
         <ul><a href="/">Home</a></ul>
         <ul><a href="/catalog">Catalog</a></ul>
-        <ul><img src={logo} alt="logo"></img></ul>
+        <ul><img src={logo} alt="logo" style={{ height: '45px', borderRadius: '10px' }}></img></ul>
         <ul><a href="/">About</a></ul>
         {!isLoggedIn ? (
           <ul><a href="/Login">Login</a></ul>
