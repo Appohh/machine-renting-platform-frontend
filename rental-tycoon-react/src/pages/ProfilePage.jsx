@@ -18,6 +18,7 @@ function ProfilePage() {
       UserService.getUserById(userId)
         .then((response) => {
           setUser(response);
+          console.log(response);
         })
         .catch((error) => {
           console.error(error);
@@ -25,46 +26,64 @@ function ProfilePage() {
     }
   }, [decodedToken]);
 
-  
-  const handleUpdatePage = () =>
-  {
+
+  const handleUpdatePage = () => {
     navigate("/UpdateProfilePage")
   }
 
   const handleRentHistory = () => {
     if (user && user.id) {
-      navigate(`/History/${user.id}`); 
+      navigate(`/History/${user.id}`);
     }
   };
 
   return (
-    <div className="profile-page">
-      {user && (
-        <div>
-          <label>First Name:</label>
-          <input type="text" value={user.firstName} readOnly />
-
-          <label>Last Name:</label>
-          <input type="text" value={user.lastName} readOnly />
-
-          <label>Address:</label>
-          <input type="text" value={user.address} readOnly />
-
-          <label>City:</label>
-          <input type="text" value={user.city} readOnly />
-
-          <label>Email:</label>
-          <input type="text" value={user.email} readOnly />
-
-          <label>Phone:</label>
-          <input type="text" value={user.phone} readOnly />
+    <div className='account-content'>
+      <div className='account-sidebar'>
+        <h1 id='sidebar-title'>Account</h1>
+        <div className='account-sidebar-links'>
+          <button onClick={handleUpdatePage}>Update Profile</button>
+          <button onClick={handleRentHistory}>Rent History</button>
         </div>
-      )}
-      <div className="submit" onClick={handleUpdatePage}>Update Information</div>
-      <div className='See-rents' onClick={handleRentHistory}>
-          Rent History
       </div>
-    </div>  
+
+      <div className="account-container">
+        <h1>Account information</h1>
+        {user && (
+          <div className='profile-info-container'>
+            <div className='profile-field'>
+              <label>First Name:</label>
+              <input type="text" value={user.firstName} readOnly />
+            </div>
+
+            <div className='profile-field'>
+              <label>Last Name:</label>
+              <input type="text" value={user.lastName} readOnly />
+            </div>
+
+            <div className='profile-field'>
+              <label>Address:</label>
+              <input type="text" value={user.address} readOnly />
+            </div>
+
+            <div className='profile-field'>
+              <label>City:</label>
+              <input type="text" value={user.city} readOnly />
+            </div>
+
+            <div className='profile-field'>
+              <label>Email:</label>
+              <input type="text" value={user.email} readOnly />
+            </div>
+
+            <div className='profile-field'>
+              <label>Phone:</label>
+              <input type="text" value={user.phone} readOnly />
+            </div>
+          </div>
+        )}
+      </div>
+    </div>
   );
 }
 
