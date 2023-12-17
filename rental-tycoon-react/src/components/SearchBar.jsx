@@ -1,6 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import productService from "../services/ProductService";
 import { useState } from "react";
+import crane  from '../assets/images/parts/crane.png'
 
 function SearchBar() {
   const [searchResults, setSearchResults] = useState([]);
@@ -28,7 +29,8 @@ function SearchBar() {
   return (
     <>
       <form className="search-container">
-        <input className='search-bar'
+      <img src={crane} alt='crane'></img>
+      <input className='search-bar'
           type="text"
           placeholder="Search for products..."
           value={SearchProduct}

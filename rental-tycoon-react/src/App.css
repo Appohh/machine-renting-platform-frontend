@@ -95,18 +95,25 @@ input[type="date"] {
 /* hero  */
 .hero {
   padding: 25px;
-  background: #000a50;
+  background: #134ba7;
   position: relative;
   margin-bottom: 100px;
+  background-image: url(https://png.pngtree.com/thumb_back/fw800/background/20220329/pngtree-mobile-crane-blueprint-build-wheel-invisible-photo-image_26431738.jpg);
+  background-position: center;
+  background-size: 84% 100%;
+  background-repeat: no-repeat;
 }
 
-.hero-content img {
+.hero-content .banner-image {
   max-height: 252px;
   height: 19vw;
+  border-radius: 8px;
+  box-shadow: 7px 4px 9px 5px black;
 }
 
 .hero-content h1 {
   max-width: 521px;
+  text-shadow: 1px 1px 12px black;
 }
 
 .hero-content {
@@ -116,6 +123,7 @@ input[type="date"] {
   justify-content: center;
   color: whitesmoke;
   padding: 0 8%;
+  margin-bottom: 15px;
 }
 
 .search-container {
@@ -128,6 +136,7 @@ input[type="date"] {
   background: lightskyblue;
   height: 50px;
   align-items: center;
+  border-radius: 16px;
 }
 
 .search-bar {
@@ -140,6 +149,8 @@ input[type="date"] {
   background-position: 98%;
   background-size: contain;
   background-repeat: no-repeat;
+  border-radius: 7px;
+  border: 1px;
 }
 
 .section-blank {
@@ -168,7 +179,10 @@ input[type="date"] {
 .category {
   width: 11vw;
   height: 11vw;
+  border-radius: 20px;
   background: gray;
+  overflow: hidden;
+  box-shadow: 0px 5px 9px 3px #000000c7;
 }
 
 .search-results {
@@ -180,10 +194,29 @@ input[type="date"] {
   font-weight: 900;
   padding: 8px;
   box-sizing: border-box;
+  border-radius: 7px;
+  border: 1px;
 }
 
 .search-results div:hover {
   background: #9ea6e2;
   cursor: pointer;
   transition: 0.5s;
+}
+
+.category-overlay {
+  width: 100%;
+  height: 100%;
+  background: #1d1d1d57;
+  backdrop-filter: blur(1px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.category-overlay h2 {
+  color: white;
+  font-size: 15px;
+  text-shadow: 1px 1px 9px black;
+  width: unset;
 }
