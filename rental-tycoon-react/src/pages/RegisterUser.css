@@ -5,6 +5,7 @@
   width: 600px;
   background-color: #000A50;
   padding-bottom: 30px;
+  margin-bottom: 40px;
 }
 
 .header {
@@ -95,6 +96,7 @@
   gap: 30px;
   margin: 60px auto;
   color: #001eff;
+
 }
 
 .submit {
@@ -109,6 +111,7 @@
   font-size: 19px;
   font-weight: 700;
   cursor: pointer;
+  margin-top: 0px;
 }
 
 .gray {
