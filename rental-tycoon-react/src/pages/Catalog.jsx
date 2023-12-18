@@ -1,10 +1,13 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 import ProductService from '../services/ProductService';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation  } from 'react-router-dom';
 import '../pages/Catalog.css'
 
 const Catalog = () => {
+    const location = useLocation();
+    const queryParams = new URLSearchParams(location.search);
+    const categoryId = queryParams.get('categoryId');
     const [products, setProducts] = useState([]);
     const [nameFilter, setNameFilter] = useState('');
     const [categoryFilter, setCategoryFilter] = useState(''); 
@@ -12,12 +15,24 @@ const Catalog = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        ProductService.getAllProducts()
+        if (categoryId) {
+            const maxPrice = maxPriceFilter ? parseFloat(maxPriceFilter) : undefined;
+            ProductService.filterMachine(nameFilter, maxPrice, parseInt(categoryId))
+                .then(response => {
+                    setProducts(response);
+                })
+                .catch(error => {
+                    console.error('Error filtering products:', error);
+                });
+                setCategoryFilter(categoryId);
+        } else {
+            ProductService.getAllProducts()
             .then(response => setProducts(response))
             .catch(error => {
                 console.error('Error setting products:', error);
             });
-    }, []);
+    }
+    }, [categoryId]);
 
     function onChangeName(event) {
         setNameFilter(event.target.value);

@@ -13,6 +13,22 @@ import cat9 from '../assets/images/categories/cat9.jpg'
 import cat10 from '../assets/images/categories/cat10.jpg'
 import cat11 from '../assets/images/categories/cat11.jpg'
 import cat12 from '../assets/images/categories/cat12.jpg'
+import { Link } from 'react-router-dom';
+
+const categories = [
+  { id: 1, name: 'Earth moving', image: cat1 },
+  { id: 2, name: 'Lifting', image: cat2 },
+  { id: 3, name: 'Road machine', image: cat3 },
+  { id: 4, name: 'Argricultural', image: cat4 },
+  { id: 5, name: 'Trucks', image: cat5 },
+  { id: 6, name: 'Crushing', image: cat6 },
+  { id: 7, name: 'Platforms', image: cat7 },
+  { id: 8, name: 'Cranes', image: cat8 },
+  { id: 9, name: 'Compressors', image: cat9 },
+  { id: 10, name: 'Trailers', image: cat10 },
+  { id: 11, name: 'Various', image: cat11 },
+  { id: 12, name: 'Lawn Mowers', image: cat12 },
+]
 
 function Home() {
   return (
@@ -27,66 +43,22 @@ function Home() {
       <section className='section-blank section-categories'>
         <h2>Categories</h2>
         <div className='categories-container'>
-          <div className='category' style={{ backgroundImage: `url(${cat1})`, backgroundSize: 'cover' }}>
-            <div className='category-overlay'>
-              <h2>Earth moving</h2>
-            </div>
-          </div>
-          <div className='category' style={{ backgroundImage: `url(${cat2})`, backgroundSize: 'cover' }}>
-            <div className='category-overlay'>
-              <h2>Lifting</h2>
-            </div>
-          </div>
-          <div className='category' style={{ backgroundImage: `url(${cat3})`, backgroundSize: 'cover' }}>
-            <div className='category-overlay'>
-              <h2>Road machine</h2>
-            </div>
-          </div>
-          <div className='category' style={{ backgroundImage: `url(${cat4})`, backgroundSize: 'cover' }}>
-            <div className='category-overlay'>
-              <h2>Argricultural vehicles</h2>
-            </div>
-          </div>
-          <div className='category' style={{ backgroundImage: `url(${cat5})`, backgroundSize: 'cover' }}>
-            <div className='category-overlay'>
-              <h2>Trucks</h2>
-            </div>
-          </div>
-          <div className='category' style={{ backgroundImage: `url(${cat6})`, backgroundSize: 'cover' }}>
-            <div className='category-overlay'>
-              <h2>Crushing</h2>
-            </div>
-          </div>
-          <div className='category' style={{ backgroundImage: `url(${cat7})`, backgroundSize: 'cover' }}>
-            <div className='category-overlay'>
-              <h2>Platforms</h2>
-            </div>
-          </div>
-          <div className='category' style={{ backgroundImage: `url(${cat8})`, backgroundSize: 'cover' }}>
-            <div className='category-overlay'>
-              <h2>Cranes</h2>
-            </div>
-          </div>
-          <div className='category' style={{ backgroundImage: `url(${cat9})`, backgroundSize: 'cover' }}>
-            <div className='category-overlay'>
-              <h2>Compressors</h2>
-            </div>
-          </div>
-          <div className='category' style={{ backgroundImage: `url(${cat10})`, backgroundSize: 'cover' }}>
-            <div className='category-overlay'>
-              <h2>Trailers</h2>
-            </div>
-          </div>
-          <div className='category' style={{ backgroundImage: `url(${cat11})`, backgroundSize: 'cover' }}>
-            <div className='category-overlay'>
-              <h2>Various</h2>
-            </div>
-          </div>
-          <div className='category' style={{ backgroundImage: `url(${cat12})`, backgroundSize: 'cover' }}>
-            <div className='category-overlay'>
-              <h2>Lawn Mowers</h2>
-            </div>
-          </div>
+          {categories.map(category => (
+            <Link
+              key={category.id}
+              to={`/catalog?categoryId=${category.id}`}
+              className='category-button'
+            >
+              <div
+                className='category'
+                style={{ backgroundImage: `url(${category.image})`, backgroundSize: 'cover' }}
+              >
+                <div className='category-overlay'>
+                  <h2>{category.name}</h2>
+                </div>
+              </div>
+            </Link>
+          ))}
         </div>
       </section>
     </>
