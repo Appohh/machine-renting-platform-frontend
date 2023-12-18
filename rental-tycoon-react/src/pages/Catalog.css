@@ -1,7 +1,6 @@
 .filter-container {
     display: flex;
-    justify-content: center;
-    align-items: center;
+    justify-content: space-around;
     margin-top: 10px;
 }
 
@@ -27,3 +26,9 @@
     position: absolute;
 }
 
+.btn-apply-filter {
+    border: 1px solid gray;
+    background: #020a4d;
+    color: aliceblue;
+    font-weight: 600;
+}

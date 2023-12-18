@@ -79,7 +79,7 @@ const Catalog = () => {
                     <option value="11">Various</option>
                     <option value="12">Lawn Mowers</option>
                 </select>
-                <button onClick={applyFilters}>Apply Filters</button>
+                <button className='btn-apply-filter' onClick={applyFilters}>Apply Filters</button>
             </div>
 
             <div className="profile-user">
