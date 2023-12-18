@@ -32,3 +32,7 @@
     color: aliceblue;
     font-weight: 600;
 }
+
+.filter-container select, input, button {
+    border-radius: 7px;
+}
