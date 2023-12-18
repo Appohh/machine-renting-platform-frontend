@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { decodeToken } from 'react-jwt';
 import { useLocation } from 'react-router-dom';
 import RentStep1 from '../components/RentSteps/RentStep1';
 import RentStep2 from '../components/RentSteps/RentStep2';
@@ -9,7 +10,6 @@ import RentService2 from '../services/RentService2';
 const RentPage = () => {
 
     const location = useLocation();
-
     const [rentStep, setRentStep] = useState(1);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [rentData, setRentData] = useState({
@@ -17,7 +17,7 @@ const RentPage = () => {
         endDate: '',
         address: '',
         city: '',
-        customerId: 1,
+        customerId: null,
         products: [],
     });
     // const { cart } = location.state;
@@ -26,8 +26,18 @@ const RentPage = () => {
     useEffect(() => {
         const products = location.state.products;
         setCart(products);
+    
+        // Retrieve token from localStorage
         const accessToken = localStorage.getItem('accessToken');
         setIsLoggedIn(accessToken !== null);
+        
+
+        if (accessToken) {
+            const tokenData = decodeToken(accessToken); 
+            if (tokenData && tokenData.userId) {
+                setRentData({ ...rentData, customerId: tokenData.userId });
+            }
+        }
     }, []);
 
     function step1Next() {

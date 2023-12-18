@@ -4,18 +4,11 @@ import ProductService from './ProductService'
 
 const BASE_URL = 'http://localhost:8080/rent'; 
 
-const rentService = {
-  createRent: async (createRentRequest) => {
-    try {
-      const response = await axios.post(BASE_URL, createRentRequest);
-      return response.data;
-    } catch (error) {
-
-      console.error('Error creating rent:', error);
-      throw error;
-    }
-  },
-};
+function createRent(createRentRequest){
+  const response = axiosInstance.post(BASE_URL, createRentRequest);
+  return response.data;
+}
+    
 
 const getRentHistory = async (userId) => {
   const response = await axiosInstance.get(`${BASE_URL}/${userId}`);
@@ -36,5 +29,5 @@ const getRentHistory = async (userId) => {
 }
 
 export default {
-rentService,
+createRent,
 getRentHistory};
