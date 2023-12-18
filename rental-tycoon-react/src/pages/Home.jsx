@@ -14,9 +14,6 @@ import cat10 from '../assets/images/categories/cat10.jpg'
 import cat11 from '../assets/images/categories/cat11.jpg'
 import cat12 from '../assets/images/categories/cat12.jpg'
 
-
-
-
 function Home() {
   return (
     <>
@@ -32,62 +29,62 @@ function Home() {
         <div className='categories-container'>
           <div className='category' style={{ backgroundImage: `url(${cat1})`, backgroundSize: 'cover' }}>
             <div className='category-overlay'>
-              <h2>Category 1</h2>
+              <h2>Earth moving</h2>
             </div>
           </div>
           <div className='category' style={{ backgroundImage: `url(${cat2})`, backgroundSize: 'cover' }}>
             <div className='category-overlay'>
-              <h2>Category 2</h2>
+              <h2>Lifting</h2>
             </div>
           </div>
           <div className='category' style={{ backgroundImage: `url(${cat3})`, backgroundSize: 'cover' }}>
             <div className='category-overlay'>
-              <h2>Category 3</h2>
+              <h2>Road machine</h2>
             </div>
           </div>
           <div className='category' style={{ backgroundImage: `url(${cat4})`, backgroundSize: 'cover' }}>
             <div className='category-overlay'>
-              <h2>Category 4</h2>
+              <h2>Argricultural vehicles</h2>
             </div>
           </div>
           <div className='category' style={{ backgroundImage: `url(${cat5})`, backgroundSize: 'cover' }}>
             <div className='category-overlay'>
-              <h2>Category 5</h2>
+              <h2>Trucks</h2>
             </div>
           </div>
           <div className='category' style={{ backgroundImage: `url(${cat6})`, backgroundSize: 'cover' }}>
             <div className='category-overlay'>
-              <h2>Category 6</h2>
+              <h2>Crushing</h2>
             </div>
           </div>
           <div className='category' style={{ backgroundImage: `url(${cat7})`, backgroundSize: 'cover' }}>
             <div className='category-overlay'>
-              <h2>Category 7</h2>
+              <h2>Platforms</h2>
             </div>
           </div>
           <div className='category' style={{ backgroundImage: `url(${cat8})`, backgroundSize: 'cover' }}>
             <div className='category-overlay'>
-              <h2>Category 8</h2>
+              <h2>Cranes</h2>
             </div>
           </div>
           <div className='category' style={{ backgroundImage: `url(${cat9})`, backgroundSize: 'cover' }}>
             <div className='category-overlay'>
-              <h2>Category 9</h2>
+              <h2>Compressors</h2>
             </div>
           </div>
           <div className='category' style={{ backgroundImage: `url(${cat10})`, backgroundSize: 'cover' }}>
             <div className='category-overlay'>
-              <h2>Category 10</h2>
+              <h2>Trailers</h2>
             </div>
           </div>
           <div className='category' style={{ backgroundImage: `url(${cat11})`, backgroundSize: 'cover' }}>
             <div className='category-overlay'>
-              <h2>Category 11</h2>
+              <h2>Various</h2>
             </div>
           </div>
           <div className='category' style={{ backgroundImage: `url(${cat12})`, backgroundSize: 'cover' }}>
             <div className='category-overlay'>
-              <h2>Category 12</h2>
+              <h2>Lawn Mowers</h2>
             </div>
           </div>
         </div>

@@ -2,12 +2,13 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import ProductService from '../services/ProductService';
 import { useNavigate } from 'react-router-dom';
+import '../pages/Catalog.css'
 
 const Catalog = () => {
     const [products, setProducts] = useState([]);
     const [nameFilter, setNameFilter] = useState('');
-    const [categoryFilter, setCategoryFilter] = useState(10000); 
-    const [maxPriceFilter, setMaxPriceFilter] = useState('');
+    const [categoryFilter, setCategoryFilter] = useState(''); 
+    const [maxPriceFilter, setMaxPriceFilter] = useState(10000);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -44,19 +45,25 @@ const Catalog = () => {
 
     return (
         <>
-            <div>
+             <div className="filter-container">
                 <input
                     type="text"
                     placeholder="Filter by name"
                     value={nameFilter}
                     onChange={onChangeName}
+                    className="filter-input"
                 />
-                <input
-                    type="number"
-                    placeholder="Max Price"
-                    value={maxPriceFilter}
-                    onChange={onChangeMaxPrice}
-                />
+                <div className="slider-container">
+                    <span className="slider-value">{maxPriceFilter}</span>
+                    <input
+                        type="range"
+                        min="0"
+                        max="10000"
+                        value={maxPriceFilter}
+                        onChange={onChangeMaxPrice}
+                        className="filter-slider"
+                    />
+                </div>
                 <select value={categoryFilter} onChange={onChangeCategory}>
                     <option value="0">All</option>
                     <option value="1">Earth moving</option>
