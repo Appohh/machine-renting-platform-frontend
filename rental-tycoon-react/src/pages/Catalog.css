@@ -1,6 +1,6 @@
 .filter-container {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     margin-top: 10px;
 }
@@ -11,10 +11,6 @@
     margin-right: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
-}
-
-.filter-slider {
-    width: 200px; /* Adjust width as needed */
 }
 
 .slider-container {
@@ -30,3 +26,4 @@
     color: #555;
     position: absolute;
 }
+

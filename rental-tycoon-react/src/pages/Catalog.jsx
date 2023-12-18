@@ -54,7 +54,7 @@ const Catalog = () => {
                     className="filter-input"
                 />
                 <div className="slider-container">
-                    <span className="slider-value">{maxPriceFilter}</span>
+                    <span className="slider-value">€{maxPriceFilter},-</span>
                     <input
                         type="range"
                         min="0"
@@ -65,7 +65,7 @@ const Catalog = () => {
                     />
                 </div>
                 <select value={categoryFilter} onChange={onChangeCategory}>
-                    <option value="0">All</option>
+                    <option value="0">All Categories</option>
                     <option value="1">Earth moving</option>
                     <option value="2">Lifting</option>
                     <option value="3">Road machine</option>
