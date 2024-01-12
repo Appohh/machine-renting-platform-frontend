@@ -14,6 +14,7 @@ const RentStep3 = ( {cart, step3Next} ) => {
     const totalPrice = products.reduce((acc, product) => acc + product.price, 0);
 
     const handleConfirmRent = () => {
+
         step3Next();
     };
 
@@ -25,7 +26,7 @@ const RentStep3 = ( {cart, step3Next} ) => {
                     <li key={index}>{product.name} - ${product.price}</li>
                 ))}
             </ul>
-            <h3>Total Price: ${totalPrice}</h3>
+            {/* <h3>Total Price: ${totalPrice}</h3> */}
             <button onClick={handleConfirmRent}>Confirm Rent</button>
         </div>
     );

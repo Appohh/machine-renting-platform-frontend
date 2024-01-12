@@ -12,6 +12,7 @@ import ProfilePage from "./pages/ProfilePage";
 import UpdateProfilePage from "./pages/UpdateProfilePage";
 import RentHistory from "./pages/RentHistory";
 import RegisterUser from "./pages/RegisterUser";
+import CartComponent from "./components/Cart/CartComponent";
 
 
 function App() {
@@ -19,21 +20,22 @@ function App() {
     <>
       <div className='main-wrap'>
         <Router>
+          <CartComponent />
           <div className='nav'>
-            <NavBar/>
+            <NavBar />
           </div>
           <div className='content'>
             <Routes>
-              <Route path="/Login" element={<LoginPage/>} />
-              <Route path="/register" element={<RegisterUser/>} />
+              <Route path="/Login" element={<LoginPage />} />
+              <Route path="/register" element={<RegisterUser />} />
               <Route path="/" element={<Home />} />
               <Route path="/addRent" element={<AddRent />} />
               <Route path="/addMachine" element={<CreateMachine />} />
               <Route path="/ProductPage/:productId" element={<ProductPage />} />
               <Route path="/catalog" element={<Catalog />} />
               <Route path="/rentpage" element={<RentPage />} />
-              <Route path="/ProfilePage" element={<ProfilePage />}/>
-              <Route path="/UpdateProfilePage" element={<UpdateProfilePage />}/>
+              <Route path="/ProfilePage" element={<ProfilePage />} />
+              <Route path="/UpdateProfilePage" element={<UpdateProfilePage />} />
               <Route path="/History/:userId" element={<RentHistory />} />
             </Routes>
           </div>

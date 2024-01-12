@@ -82,16 +82,16 @@ const RentPage = () => {
             case 0:
                 return <div>You have no items selected</div>;
             case 1:
-                return <RentStep1 cart={cart} step1Next={step1Next} />;
+                return <div className='rent-container1'><RentStep1 cart={cart} step1Next={step1Next} /></div>;
             case 2:
-                return <RentStep2 setData={step2SetData} step2Next={step2Next} />;
+                return <div className='rent-container1'><RentStep2 setData={step2SetData} step2Next={step2Next} /></div>;
             case 3:
                 console.log("rentdata3", rentData)
                 return <RentStep3 cart={cart} step3Next={step3Next} />;
             case 4:
-                return <div>Thank you for your rent!</div>;
+                return <div className='rent-container1'><div>Thank you for your rent!</div></div>;
             case 5:
-                return <div>Something went wrong, please try again later.</div>;
+                return <div className='rent-container1'><div>Something went wrong, please try again later.</div></div>;
             default:
                 return null;
         }
@@ -99,8 +99,8 @@ const RentPage = () => {
 
     return (
         <div>
-            <h1>Rent Page</h1>
-            {renderRentStep()}
+                <h1 style={{ marginLeft: '8%', width: '500px' }}>Rent Page</h1>
+                {renderRentStep()}
         </div>
     );
 };

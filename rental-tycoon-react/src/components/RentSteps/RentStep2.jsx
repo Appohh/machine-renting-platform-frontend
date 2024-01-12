@@ -28,10 +28,10 @@ const RentStep2 = ({ setData, step2Next }) => {
     }, []);
 
     return (
-        <div>
+        <div className='step1-rent-container'>
             <h2>When and where:</h2>
 
-            <form onSubmit={handleSubmit}>
+            <form className='step1-rent' onSubmit={handleSubmit}>
                 <label htmlFor="startDate">Start Date:</label>
                 <input
                     type="date"

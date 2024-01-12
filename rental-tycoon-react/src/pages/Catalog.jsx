@@ -1,8 +1,10 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 import ProductService from '../services/ProductService';
-import { useNavigate, useLocation  } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import '../pages/Catalog.css'
+import { useCart } from '../components/Cart/CartContext';
+import AddToCartPopUp from '../components/Cart/AddToCartPopUp';
 
 const Catalog = () => {
     const location = useLocation();
@@ -10,9 +12,12 @@ const Catalog = () => {
     const categoryId = queryParams.get('categoryId');
     const [products, setProducts] = useState([]);
     const [nameFilter, setNameFilter] = useState('');
-    const [categoryFilter, setCategoryFilter] = useState(''); 
+    const [categoryFilter, setCategoryFilter] = useState('');
     const [maxPriceFilter, setMaxPriceFilter] = useState(10000);
+    const { cart, addToCart } = useCart();
     const navigate = useNavigate();
+    const [selectedProduct, setSelectedProduct] = useState(null);
+
 
     useEffect(() => {
         if (categoryId) {
@@ -24,14 +29,14 @@ const Catalog = () => {
                 .catch(error => {
                     console.error('Error filtering products:', error);
                 });
-                setCategoryFilter(categoryId);
+            setCategoryFilter(categoryId);
         } else {
             ProductService.getAllProducts()
-            .then(response => setProducts(response))
-            .catch(error => {
-                console.error('Error setting products:', error);
-            });
-    }
+                .then(response => setProducts(response))
+                .catch(error => {
+                    console.error('Error setting products:', error);
+                });
+        }
     }, [categoryId]);
 
     function onChangeName(event) {
@@ -58,9 +63,13 @@ const Catalog = () => {
             });
     }
 
+    const addProductToCart = (product) => {
+        setSelectedProduct(product);
+    }
+
     return (
         <>
-             <div className="filter-container">
+            <div className="filter-container">
                 <input
                     type="text"
                     placeholder="Filter by name"
@@ -109,7 +118,8 @@ const Catalog = () => {
                                 {product.files.map((file, index) => (
                                     <div className="post-content" key={index}>
                                         <div className='rent-container'>
-                                            <button onClick={() => navigate(`/rentpage`, { state: { products: [product.id] } })} className='rent-button'>Rent</button>
+                                            {/* <button onClick={() => navigate(`/rentpage`, { state: { products: [product.id] } })} className='rent-button'>Rent</button> */}
+                                            <button onClick={() => addProductToCart(product)} className='rent-button'>Rent</button>
                                         </div>
                                         {file.type.startsWith('image/') ? (
                                             <img src={file.url} alt={`Product File ${index}`} />
@@ -125,6 +135,15 @@ const Catalog = () => {
                     <div>No products found</div>
                 )}
             </div>
+
+            {selectedProduct && (
+                <AddToCartPopUp
+                    product={selectedProduct}
+                    onClose={() => setSelectedProduct(null)}
+                />
+            )}
+
+
         </>
     );
 };

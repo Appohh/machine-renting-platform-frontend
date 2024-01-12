@@ -1,0 +1,90 @@
+.cart-container {
+    grid-row: 2;
+    position: absolute;
+    width: 350px;
+    grid-column: 3;
+    display: grid;
+    grid-template-rows: auto 3fr;
+    right: 0;
+    background: cornflowerblue;
+    min-height: 310px;
+    z-index: 3;
+    padding: 2% 6%;
+}
+
+.cart-item {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 10px;
+}
+
+.add-to-cart-popup {
+    position: absolute;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background: #14161dbf;
+    z-index: 5;
+}
+
+.add-to-cart-popup-container {
+    background: #14257d;
+    width: 50vw;
+    text-shadow: 0 0 7px black;
+    height: 60vh;
+    display: flex;
+    justify-content: center;
+    color: white;
+    flex-direction: column;
+    border-radius: 20px;
+    align-items: center;
+    gap: 38px;
+    position: relative;
+}
+
+.add-to-cart-popup-close {
+    position: absolute;
+    top: 6%;
+    right: 3%;
+    font-weight: 900;
+    cursor: pointer;
+}
+
+.add-to-cart-popup-datepickers {
+    display: flex;
+}
+
+.date-picker-container-start {
+    position: relative;
+    text-align: center;
+}
+
+.date-picker-container-end {
+    position: relative;
+    text-align: center;
+}
+
+.add-to-cart-popup-button-container {
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: 25px;
+}
+
+.add-to-cart-popup-button-container button {
+    padding: 10px;
+    background: dodgerblue;
+    color: white;
+    font-size: 13px;
+    font-weight: 900;
+    text-shadow: -2px -2px 0px black;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.add-to-cart-popup-button-container button:hover {
+    background: #0e1a6c;
+}

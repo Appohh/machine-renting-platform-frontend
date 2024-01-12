@@ -251,3 +251,13 @@ input[type="date"] {
   z-index: 0;
   top: -575%;
 }
+
+.step1-rent {
+  display: flex;
+  flex-direction: column;
+  width: 400px;
+}
+
+.rent-container1{
+  padding: 0 8%;
+}
