@@ -1,9 +1,12 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useCart } from './CartContext.jsx';
 import './Cart.css';
+import cartPic from '../../assets/images/parts/cart.png';
+
 
 const CartComponent = () => {
-    const { cart, clearCart } = useCart();
+    const { cart, clearCart, removeFromCart } = useCart(); // import removeFromCart
+    const [showCart, setShowCart] = useState(false);
 
     useEffect(() => {
         console.log('cart', cart);
@@ -23,7 +26,13 @@ const CartComponent = () => {
     };
 
     return (
-        <div className='cart-container'>
+        <div className={`cart-container ${showCart ? 'cartTranslated' : ''}`}>
+            <div className='show-cart-container'>
+                <div className='show-cart' onClick={() => setShowCart(!showCart)}>
+                    <h2>{cart.length}</h2>
+                    <img height={'110px'} src={cartPic} alt='cart'></img>
+                </div>
+            </div>
             <h2>Cart</h2>
             <div className='cart-items'>
                 <div className='cart-item'>
@@ -38,6 +47,7 @@ const CartComponent = () => {
                             <h3>{cartitem.product.name}</h3>
                             <h3>{days}</h3>
                             <h3>€{cartitem.product.price}</h3>
+                            <button onClick={() => removeFromCart(cartitem.product)}>Remove</button>
                         </div>
                     );
                 })}
@@ -45,7 +55,7 @@ const CartComponent = () => {
             <div className='cart-total'>
                 <h3>Total Price: €{calculateTotalCost()}</h3>
             </div>
-            <div className='button-container'>
+            <div className='cart-button-container'>
                 <button onClick={clearCart}>Clear</button>
                 <button>Checkout</button>
             </div>

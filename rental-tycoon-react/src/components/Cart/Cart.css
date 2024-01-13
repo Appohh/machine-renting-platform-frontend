@@ -1,15 +1,22 @@
 .cart-container {
     grid-row: 2;
-    position: absolute;
+    position: fixed;
     width: 350px;
+    border-top-left-radius: 50px;
+    border-bottom-left-radius: 50px;
     grid-column: 3;
-    display: none;
+    display: grid;
     grid-template-rows: auto 3fr;
     right: 0;
-    background: cornflowerblue;
+    border: 3px solid #102850;
+    background: #134cb2;
     min-height: 310px;
+    color: white;
+    text-shadow: 0 0 3px black;
     z-index: 3;
     padding: 2% 6%;
+    transform: translateX(95%);
+    transition: 0.5s;
 }
 
 .cart-item {
@@ -87,4 +94,46 @@
 
 .add-to-cart-popup-button-container button:hover {
     background: #0e1a6c;
+}
+
+.show-cart-container {
+    position: absolute;
+    top: 12%;
+    left: -13%;
+    cursor: pointer;
+}
+
+.show-cart {
+    display: flex;
+}
+
+.show-cart h2 {
+    position: absolute;
+    background: #ecb257;
+    border-radius: 12px;
+    padding: 7px;
+}
+
+.cartTranslated {
+    transform: translateX(0) !important;
+}
+
+.cart-button-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.cart-button-container button {
+    background: white;
+    padding: 1% 8%;
+    font-size: 16px;
+    font-weight: 700;
+    color: #134cb2;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.cart-button-container button:hover {
+    background: #134cb2;
+    color: white;
 }
