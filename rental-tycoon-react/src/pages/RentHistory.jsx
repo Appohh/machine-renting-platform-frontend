@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import RentService2 from '../services/RentService2';
-import { useParams } from 'react-router-dom';
+import RentService from '../services/RentService';
+import { useParams, Link } from 'react-router-dom';
 import "./rentHistory.css"
 
 function RentHistory() {
@@ -9,9 +9,9 @@ function RentHistory() {
 
   useEffect(() => {
     if (userId) {
-      RentService2.getRentHistory(userId)
+      RentService.getRentHistory()
         .then((response) => {
-          setRentInformation(response);
+          setRentInformation(response.rents);
         })
         .catch((error) => {
           console.error(error);
@@ -19,15 +19,35 @@ function RentHistory() {
     }
   }, [userId]);
 
+  const formatDate = (timestamp) => {
+    const date = new Date(timestamp);
+    return date.toLocaleDateString(); 
+  }
+
 
   return (
     <div className="rent-history-page">
-      {rentInformation.map((rentInfo, index) => (
-        <div key={index} className="rent-card">
-          <img src={rentInfo.product.files[0].url} alt="Image problem"/>
-          <p className="product-name">{rentInfo.product.name}</p>
-          <p className="rent-price">€{rentInfo.product.price}</p>
-        </div>
+      <h2>Your Rent History</h2>
+      {rentInformation.map((rentInfo) => (
+        <Link
+        key={rentInfo.id}
+        to={`/rentDetails:${rentInfo.id}`}
+        className='rent-card'
+        style={{ textDecoration: 'none', color: 'inherit' }}
+        >
+          <div className="rent-card-header">
+            <p>Date:</p>
+            <p>Address:</p>
+            <p>City:</p>
+            <p>Total Price:</p>
+          </div>
+          <div className="rent-card-details">
+            <p className='rent-timestamp'>{formatDate(rentInfo.timestamp)} </p>
+            <p className="rent-address">{rentInfo.address}</p>
+            <p className='rent-city'>{rentInfo.city}</p>
+            <p className="rent-price">€{rentInfo.total.toFixed(2)}</p>
+          </div>   
+      </Link>
       ))}
     </div>
   );

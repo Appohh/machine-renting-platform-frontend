@@ -6,30 +6,34 @@
   }
   
   .rent-card {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+    position: relative;
     width: 100%;
     max-width: 800px;
     margin-bottom: 20px;
-    padding: 20px;
+    padding: 10px;
     border: 1px solid #ccc;
     border-radius: 10px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    font-size: 20px;
+  }
+
+  .rent-card:hover{
+    box-shadow: 0 2px 8px #000a50;
   }
   
-  .rent-card img {
-    width: 100px;
-    height: 100px;
-    object-fit: cover;
-    margin-right: 20px;
+  .rent-card-header {
+    position: absolute;
+    top: -15px; /* Adjust as needed */
+    font-style: oblique;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    text-decoration: underline;
   }
   
-  .rent-card .product-name {
-    flex-grow: 1;
-    margin-right: 20px;
+  .rent-card-details {
+    display: flex;
+    justify-content: space-between;
   }
   
-  .rent-card .rent-price {
-    text-align: right;
-  }
+  

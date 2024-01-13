@@ -35,9 +35,20 @@ async function addRentRow(rentRowData) {
   }
 }
 
-const getRentHistory = async (userId) => {
-  const response = await axiosInstance.get(`${BASE_URL}/${userId}`);
-  const rentProductList = response.data.rentProductList;
+const getRentHistory = async () => {
+  try {
+    const response = await axiosInstance.get(`${hostname}/rent`);
+    const rents = response.data;
+    return rents;
+  }catch(error){
+    console.error('Error fetching rents', error);
+    throw error;
+  }
+}
+
+const getRentRowsHistory = async (rentId) => {
+  const response = await axiosInstance.get(`${hostname}/rent/getRentRow/${rentId}`);
+  const rentProductList = response.data.rentWrapper;
   console.log("Response rentProductList: ", rentProductList);
 
   const updatedRentProductList = await Promise.all(rentProductList.map(async (item) => {
@@ -56,5 +67,6 @@ const getRentHistory = async (userId) => {
 export default {
   createRent,
   addRentRow,
-  getRentHistory
+  getRentHistory,
+  getRentRowsHistory
 };
