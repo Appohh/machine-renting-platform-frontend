@@ -123,7 +123,7 @@ function CreateMachine(newMachineData) {
     const getProductById = async (id) => {
       try {
         const response = await axiosInstance.get(`${hostname}/${instanceOf}/${id}`);
-        const product = response.data; 
+        const product = response.data.product; 
         console.log("Product by ID:", product);
     
         if (product.files && product.files.length > 0) {

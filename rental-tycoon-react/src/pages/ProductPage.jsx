@@ -19,8 +19,8 @@ function ProductPage() {
       ProductService.getProductById(productId)
         .then((response) => {
           if (response) {
-            setFoundProduct(response.product);
-            console.log(foundProduct)
+            setFoundProduct(response);
+            console.log("response: ", response)
           } else {
             console.error('Product not found');
           }
@@ -41,18 +41,19 @@ function ProductPage() {
     return (
       <div className="detailPage-profile-user">
         <div className="detailPage-post-content">
-          {foundProduct.files[0] && foundProduct.files[0].type.startsWith("image/") && (
-            <img
-              src={foundProduct.files[0].fileUrl}
-              alt={`Product File`}
-            />
-          )}
-          {foundProduct.files[0] && foundProduct.files[0].type.startsWith("video/") && (
-            <video
-              src={foundProduct.files[0].url}
-              controls
-            />
-          )}
+        {foundProduct.files[0] && foundProduct.files[0].type.startsWith("image/") && (
+          <img
+            src={foundProduct.files[0].url}
+            alt={`Product File`}
+          />
+        )}
+
+        {foundProduct.files[0] && foundProduct.files[0].type.startsWith("video/") && (
+          <video
+            src={foundProduct.files[0].url}
+            controls
+          />
+        )}
         </div>
         <div className="detailPage-post-content">
           <div className="detailPage-product-name">{foundProduct.name}</div>
