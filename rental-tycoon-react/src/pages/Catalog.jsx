@@ -123,7 +123,7 @@ const Catalog = () => {
                                             <button
                                                 className='rent-button'
                                                 
-                                                onClick={() => navigate(`/ProductPage/${product.id}`, { state: { product} })}
+                                                onClick={() => navigate(`/ProductPage/${product.id}`)}
                                                 >
                                                 Details
                                             </button>
