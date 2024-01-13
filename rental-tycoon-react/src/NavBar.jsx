@@ -5,6 +5,7 @@ import logo from './assets/logop.jpg'
 import UserService from "./services/UserService";
 import LocalStorageService from "./services/LocalStorageService";
 import Logout from "./components/Logout";
+import Headroom from 'react-headroom';
 
 
 function NavBar() {
@@ -29,6 +30,7 @@ function NavBar() {
   const isLoggedIn = user !== null;
 
   return (
+    <Headroom>
     <div className="nav">
       <li>
         <ul><a href="/">Home</a></ul>
@@ -48,6 +50,7 @@ function NavBar() {
         )}
       </li>
     </div>
+    </Headroom>
   );
 }
 

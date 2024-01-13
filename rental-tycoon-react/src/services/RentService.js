@@ -1,26 +1,16 @@
-import axios from "axios";
+import axiosInstance from "./axiosInstance";
 
 const hostname = 'http://localhost:8080';
 
-function createRentFormData(newRentData) {
-  const formData = new FormData();
-
-  formData.append('customerId', newRentData.customerId);
-  formData.append('address', newRentData.address);
-  formData.append('city', newRentData.city);
-  formData.append('total', newRentData.total);
-  formData.append('timestamp', newRentData.timestamp);
-  formData.append('discount', newRentData.discount);
-  formData.append('paid', newRentData.paid);
-  
-  const rowsJson = JSON.stringify(newRentData.rows);
-  formData.append('rows', rowsJson); 
-  return formData;
-}
-
-function createRent(newRentData) {
-  const formData = createRentFormData(newRentData);
-  return axios.post(`${hostname}/rent`, formData)
+async function createRent(rentData) {
+  const requestBody = {
+    customerId: rentData.customerId,
+    address: rentData.address,
+    city: rentData.city,
+    total: rentData.total,
+    discount: rentData.discount
+  }
+  return axiosInstance.post(`${hostname}/rent`, requestBody)
     .then(response => response.data)
     .catch(error => {
       console.error('Error creating rent:', error);
@@ -28,6 +18,24 @@ function createRent(newRentData) {
     });
 }
 
+async function addRentRow(rentRowData) {
+  const requestBody = {
+    productId: rentRowData.productId,
+    startDate: rentRowData.startDate,
+    endDate: rentRowData.endDate,
+    rentId: rentRowData.rentId,
+    quantity: rentRowData.quantity
+  }
+  try {
+    const response = await axiosInstance.post(`${hostname}/rent/addRentRow`, requestBody);
+    return response.data;
+  } catch (error) {
+    console.error('Error creating rent:', error);
+    throw error;
+  }
+}
+
 export default {
-  createRent
+  createRent,
+  addRentRow
 };
