@@ -4,7 +4,7 @@ import { useLocation } from 'react-router-dom';
 import RentStep1 from '../components/RentSteps/RentStep1';
 import RentStep2 from '../components/RentSteps/RentStep2';
 import RentStep3 from '../components/RentSteps/RentStep3';
-import RentService2 from '../services/RentService2';
+import RentService2 from '../services/RentService';
 
 
 const RentPage = () => {

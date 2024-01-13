@@ -35,7 +35,26 @@ async function addRentRow(rentRowData) {
   }
 }
 
+const getRentHistory = async (userId) => {
+  const response = await axiosInstance.get(`${BASE_URL}/${userId}`);
+  const rentProductList = response.data.rentProductList;
+  console.log("Response rentProductList: ", rentProductList);
+
+  const updatedRentProductList = await Promise.all(rentProductList.map(async (item) => {
+    const product = item.product;
+    console.log("Product: ", product);
+
+    if (product.files && product.files.length > 0) {
+      product.files = await ProductService.fetchAndUpdateFiles(product.id, product.files);
+    }
+    return item; 
+  }));
+
+  return updatedRentProductList;
+}
+
 export default {
   createRent,
-  addRentRow
+  addRentRow,
+  getRentHistory
 };
