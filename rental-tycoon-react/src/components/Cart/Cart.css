@@ -3,7 +3,7 @@
     position: absolute;
     width: 350px;
     grid-column: 3;
-    display: grid;
+    display: none;
     grid-template-rows: auto 3fr;
     right: 0;
     background: cornflowerblue;

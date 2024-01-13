@@ -1,4 +1,5 @@
 import axiosInstance from "./axiosInstance";
+import ProductService from "./ProductService"
 
 const hostname = 'http://localhost:8080';
 

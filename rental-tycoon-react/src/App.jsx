@@ -13,6 +13,7 @@ import UpdateProfilePage from "./pages/UpdateProfilePage";
 import RentHistory from "./pages/RentHistory";
 import RegisterUser from "./pages/RegisterUser";
 import CartComponent from "./components/Cart/CartComponent";
+import RentDetails from "./pages/RentDetails";
 
 
 function App() {
@@ -37,6 +38,7 @@ function App() {
               <Route path="/ProfilePage" element={<ProfilePage />} />
               <Route path="/UpdateProfilePage" element={<UpdateProfilePage />} />
               <Route path="/History/:userId" element={<RentHistory />} />
+              <Route path="/RentDetails" element={<RentDetails />} />
             </Routes>
           </div>
         </Router>

@@ -31,7 +31,7 @@ function RentHistory() {
       {rentInformation.map((rentInfo) => (
         <Link
         key={rentInfo.id}
-        to={`/rentDetails:${rentInfo.id}`}
+        to={`/rentDetails?userId=${userId}&rentId=${rentInfo.id}`}
         className='rent-card'
         style={{ textDecoration: 'none', color: 'inherit' }}
         >
