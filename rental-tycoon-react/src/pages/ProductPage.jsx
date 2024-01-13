@@ -1,58 +1,66 @@
 import { useState, useEffect } from "react";
 import './ProductPage.css';
 import ProductService from "../services/ProductService";
-import { useLocation } from 'react-router-dom';
+import { useLocation,useParams } from 'react-router-dom';
+import { useCart } from '../components/Cart/CartContext'; 
 
+ 
 function ProductPage() {
   const location = useLocation();
   const products = location.state.products;
+  const product = location.state.product;
+  let { id } = useParams();
   const [foundProduct, setFoundProduct] = useState([]);
-
+  const { addToCart } = useCart();
+  const [loading, setLoading] = useState(true); 
 
   useEffect(() => {
-    ProductService.getAllProducts(products.name)
+    ProductService.getProductById(id)
       .then((response) => {
-        console.log('API Response:', response);
         if (response) {
-            setFoundProduct(response);
+          setFoundProduct(response.data);
+          console.log(foundProduct)
         } else {
-            setFoundProduct([]);
+          console.error('Product not found');
         }
       })
       .catch((error) => {
-        console.error('Error fetching user posts:', error);
+        console.error('Error fetching product:', error);
       });
-  }, [products]);
+   }, [id]);
+   
 
+  const handleAddToCart = () => {
+    addToCart(products.id); // Assuming you want to add 1 quantity of the product
+  };
+if(foundProduct !== null){
   return (
-    <div className="profile-user">
-        {products.files.map((files, index) => {
-          if (index === 0) {
-            const isImage = files.type.startsWith("image/");
-            const isVideo = files.type.startsWith("video/");
-
-            return (
-              <div className="post-content" key={index}>
-                {isImage ? (
-                  <img
-                    src={files.url}
-                    alt={`Product File ${index}`}
-                  />
-                ) : isVideo ? (
-                  <video
-                    src={files.url}
-                    controls
-                  />
-                ) : null}
-                <div className="product-name">{products.name}</div>
-                <div className="product-price">€{products.price},-</div>
-              </div>
-            );
-          }
-          return null;
-        })}
-    </div>
-  );
+    
+      <div className="detailPage-profile-user">
+        <div className="detailPage-post-content">
+          {foundProduct.files[0] && foundProduct.files[0].type.startsWith("image/") && (
+            <img
+              src={foundProduct.files[0].url}
+              alt={`Product File`}
+            />
+          )}
+          {foundProduct.files[0] && foundProduct.files[0].type.startsWith("video/") && (
+            <video
+              src={foundProduct.files[0].url}
+              controls
+            />
+          )}
+        </div>
+        <div className="detailPage-post-content">
+          <div className="detailPage-product-name">{foundProduct.name}</div>
+          <div className="detailPage-product-price">€{foundProduct.price},-</div>
+          <div className="detailPage-product-description">{foundProduct.description}</div>
+          <button onClick={handleAddToCart}>Add to Cart</button>
+        </div>
+      </div>
+    
+   );}
+   
 }
 
 export default ProductPage;

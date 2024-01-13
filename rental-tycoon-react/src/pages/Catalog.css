@@ -36,3 +36,79 @@
 .filter-container select, input, button {
     border-radius: 7px;
 }
+.profile-user {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+    padding: 20px 8%;
+  }
+  
+  .post-content {
+    border: 1px solid #ccc;
+    padding: 20px;
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+    border-radius: 10px;
+    overflow: hidden;
+    position: relative;
+  }
+  
+  .post-content img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+  }
+  
+  .product-name {
+    margin-top: 10px;
+    font-size: 20px;
+    font-weight: bold;
+  }
+  
+  .product-price {
+    position: absolute;
+    top: 25px;
+    right: 2px;
+    background: #000;
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 16px;
+    z-index: 1;
+  }
+  
+  .product-details {
+    position: relative;
+  }
+  
+  .rent-container {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #495beea6;
+    transform: translate(0px, 100%);
+    transition: 0.5s;
+    z-index: 2;
+  }
+  
+  .rent-button {
+    width: 130px;
+    height: 30px;
+    background: #020a4d;
+    font-weight: bolder;
+    border: 2px solid #ededed;
+    border-radius: 11px;
+    letter-spacing: 3px;
+    color: white;
+    font-size: 15px;
+    text-shadow: 1px 0px 8px #8692ee;
+    cursor: pointer;
+  }
+  
+  .post-content:hover .rent-container{
+    transform: translate(0px, 0%);
+  }

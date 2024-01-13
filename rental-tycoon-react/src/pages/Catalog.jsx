@@ -120,6 +120,13 @@ const Catalog = () => {
                                         <div className='rent-container'>
                                             {/* <button onClick={() => navigate(`/rentpage`, { state: { products: [product.id] } })} className='rent-button'>Rent</button> */}
                                             <button onClick={() => addProductToCart(product)} className='rent-button'>Rent</button>
+                                            <button
+                                                className='rent-button'
+                                                
+                                                onClick={() => navigate(`/ProductPage/${product.id}`, { state: { product} })}
+                                                >
+                                                Details
+                                            </button>
                                         </div>
                                         {file.type.startsWith('image/') ? (
                                             <img src={file.url} alt={`Product File ${index}`} />
