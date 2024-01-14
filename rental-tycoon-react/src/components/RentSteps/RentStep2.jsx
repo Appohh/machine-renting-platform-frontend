@@ -1,7 +1,7 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 
-const RentStep2 = ({ setData, step2Next }) => {
+const RentStep2 = ({ setData, step2Next, productList }) => {
     const [formData, setFormData] = useState({
         startDate: '',
         endDate: '',
@@ -15,59 +15,29 @@ const RentStep2 = ({ setData, step2Next }) => {
         step2Next();
     }
 
-    const handleChange = (e) => {
-        setFormData({ ...formData, [e.target.name]: e.target.value });
-    };
-
-    const handleSubmit = (e) => {
-        e.preventDefault();
-
-    };
 
     useEffect(() => {
     }, []);
 
     return (
-        <div className='step1-rent-container'>
-            <h2>When and where:</h2>
-
-            <form className='step1-rent' onSubmit={handleSubmit}>
-                <label htmlFor="startDate">Start Date:</label>
-                <input
-                    type="date"
-                    name="startDate"
-                    value={formData.startDate}
-                    onChange={handleChange}
-                />
-
-                <label htmlFor="endDate">End Date:</label>
-                <input
-                    type="date"
-                    name="endDate"
-                    value={formData.endDate}
-                    onChange={handleChange}
-                />
-
-                <label htmlFor="address">Address:</label>
-                <input
-                    type="text"
-                    name="address"
-                    value={formData.date}
-                    onChange={handleChange}
-                />
-
-                <label htmlFor="city">City:</label>
-                <input
-                    type="text"
-                    name="city"
-                    value={formData.location}
-                    onChange={handleChange}
-                />
-
-                <button onClick={confirmData}>Next</button>
-            </form>
-
-        </div>
+        <div className='confirm-cart-container' >
+            {productList.map((cartitem, index) => {
+          return (
+            <div className='confirm-cart-item' style={{ gridTemplateColumns: '1fr 1fr 1fr'}} key={index}>
+              <h3>{cartitem.name}</h3>
+              <h3>€{cartitem.price}</h3>
+              {cartitem.files.map((file, fileIndex) => {
+                console.log("file", file);
+                return file.type.startsWith('image/') ? (
+                  <img src={file.url} alt={`Product File ${fileIndex}`} key={fileIndex} style={{ height: '110px', width: '140px' }} />
+                ) : file.type.startsWith('video/') ? (
+                  <video src={file.url} controls key={fileIndex} style={{ height: '110px', width: '140px' }} />
+                ) : null;
+              })}
+            </div>
+          );
+        })}
+      </div>
     );
 };
 
