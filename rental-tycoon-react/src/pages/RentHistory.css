@@ -2,38 +2,36 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 20px;
   }
   
   .rent-card {
     position: relative;
     width: 100%;
     max-width: 800px;
-    margin-bottom: 20px;
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 10px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-    font-size: 20px;
   }
 
   .rent-card:hover{
     box-shadow: 0 2px 8px #000a50;
   }
-  
-  .rent-card-header {
-    position: absolute;
-    top: -15px; 
-    font-style: oblique;
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-    text-decoration: underline;
-  }
+
   
   .rent-card-details {
     display: flex;
     justify-content: space-between;
+  }
+
+  .rent-card-details label {
+    text-decoration: underline;
+  }
+
+  .rent-card-details .rent-timestamp, .rent-Address, .rent-city, .rent-price{
+    font-size: 25px;
+    margin:5px;
+    margin-left: auto;
   }
   
   

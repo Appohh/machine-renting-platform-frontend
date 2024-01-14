@@ -51,19 +51,25 @@ function RentHistory({userId}) {
             onClick={() => showRentDetails(rentInfo.id)}
             style={{ textDecoration: 'none', color: 'inherit' }}
           >
-            <div className="rent-card-header">
-            <p>Date:</p>
-            <p>Address:</p>
-            <p>City:</p>
-            <p>Total Price:</p>
+            <div className='rent-card-details'>
+              <div className="rent-card-timestamp">
+                <label>Date:</label>
+                <p className='rent-timestamp'>{formatDate(rentInfo.timestamp)} </p>
+              </div>
+              <div className="rent-card-address">
+                <label>Address:</label>
+                <p className='rent-Address'>{rentInfo.address} </p>
+              </div>
+              <div className="rent-card-city">
+                <label>City:</label>
+                <p className='rent-city'>{rentInfo.city} </p>
+              </div>
+              <div className='rent-card-price'>
+                <label>Price:</label>
+              <p className="rent-price">€{rentInfo.total.toFixed(2)}</p>
+              </div>
           </div>
-          <div className="rent-card-details">
-            <p className='rent-timestamp'>{formatDate(rentInfo.timestamp)} </p>
-            <p className="rent-address">{rentInfo.address}</p>
-            <p className='rent-city'>{rentInfo.city}</p>
-            <p className="rent-price">€{rentInfo.total.toFixed(2)}</p>
-          </div>   
-        </div>
+        </div>   
       ))
       )}
     </div>
