@@ -65,9 +65,9 @@ const RentPage = () => {
             case 0:
                 return <div>You have no items selected</div>;
             case 1:
-                return <div className='rent-container1'><RentStep1 step1Next={step1Next} /></div>;
+                return <div className='rent-container1' style={{ gridTemplateColumns: '1fr' }}><RentStep1 step1Next={step1Next} /></div>;
             case 2:
-                return <div className='rent-container1'><RentStep2 setData={step2SetData} step2Next={step2Next} /></div>;
+                return <div className='rent-container1'><RentStep2 setData={step2SetData} step2Next={step2Next} productList={rentData.products} /></div>;
             case 3:
                 console.log("rentdata3", rentData)
                 return <RentStep3 cart={cart} step3Next={step3Next} />;
