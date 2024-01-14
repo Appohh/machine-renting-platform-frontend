@@ -4,6 +4,7 @@ import RentStep1 from '../components/RentSteps/RentStep1';
 import RentStep2 from '../components/RentSteps/RentStep2';
 import RentStep3 from '../components/RentSteps/RentStep3';
 import '../rentPage.css';
+import { useCart } from '../components/Cart/CartContext';
 
 
 const RentPage = () => {
@@ -15,20 +16,22 @@ const RentPage = () => {
         customerId: null,
         products: [],
     });
-    const [products, setProducts] = useState([]);
-    let userIdCurrent = null;
+    const [cartShadow, setCartShadow] = useState([]);
+    const [userIdCurrent, setUserIdCurrent] = useState(null);
+    const { cart } = useCart();
 
     useEffect(() => {    
         //retrieve token from localStorage
         const accessToken = localStorage.getItem('accessToken');
         setIsLoggedIn(accessToken !== null);
         
+        
         if (accessToken) {
             const tokenData = decodeToken(accessToken); 
             if (tokenData && tokenData.userId) {
                 setRentData({ ...rentData, customerId: tokenData.userId });
                 console.log("tokenData.userId", tokenData);
-                userIdCurrent = tokenData.userId;
+                setUserIdCurrent(tokenData.userId);
             } else {
                 console.log("tokenData.userId not found");
                 setIsLoggedIn(false);
@@ -38,8 +41,16 @@ const RentPage = () => {
 
     function step1Next(cartItems) {
         setRentData({ ...rentData, products: cartItems });
-        setRentStep(2);
+        setCartShadow(cart);
+        console.log("setCartShadow", cartShadow);
+        console.log("cart10", cart);
     }
+
+    useEffect(() => {
+        if (cartShadow.length > 0) {
+            setRentStep(2);
+        }
+    }, [cartShadow]);
 
     function step2Next() {
         setRentStep(3);
@@ -71,7 +82,7 @@ const RentPage = () => {
                 return <div className='rent-container1'><RentStep2 setData={step2SetData} step2Next={step2Next} productList={rentData.products} userId={userIdCurrent} /></div>;
             case 3:
                 console.log("rentdata3", rentData)
-                return <RentStep3 cart={cart} step3Next={step3Next} />;
+                return <div className='rent-container1' style={{ gridTemplateColumns: '1fr 1fr 1fr' }}><RentStep3 productList={rentData.products} userId={userIdCurrent} step3Next={step3Next} cart={cartShadow} /></div>;
             case 4:
                 return <div className='rent-container1'><div>Thank you for your rent!</div></div>;
             case 5:

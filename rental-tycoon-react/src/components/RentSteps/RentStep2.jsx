@@ -2,17 +2,30 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import checkMark from '../../assets/images/parts/blue-check.png';
 import { useRef } from 'react';
+import UserService from '../../services/UserService.js'
 
 const RentStep2 = ({ setData, step2Next, productList, userId }) => {
     const [formData, setFormData] = useState({
         address: '',
         city: '',
     });
-    const [selectedDiv, setSelectedDiv] = useState(null);
+    const [selectedDiv, setSelectedDiv] = useState(1);
     const input1 = useRef(null);
     const input2 = useRef(null);
     const [input1Style, setInput1Style] = useState({});
     const [input2Style, setInput2Style] = useState({});
+    const [user, setUser] = useState(null);
+
+    useEffect(() => {
+        if (userId) {
+            UserService.getUserById(userId).then((data) => {
+                setUser(data);
+                console.log("user", data);
+            });
+        } else {
+            console.log("userId not found");
+        }
+    }, [userId]);
 
     const confirmData = () => {
 
@@ -21,8 +34,8 @@ const RentStep2 = ({ setData, step2Next, productList, userId }) => {
             formData.city = "Pick-up";
         }
         else if (selectedDiv === 1) {
-            formData.address = "Deliver at my adress";
-            formData.city = "Deliver at my adress";
+            formData.address = user.address;
+            formData.city = user.city;
         }
         else if (selectedDiv === 2) {
             formData.address = input1.current.value;
@@ -88,7 +101,7 @@ const RentStep2 = ({ setData, step2Next, productList, userId }) => {
                     >
                         <h3>Deliver at my adress</h3>
                         {selectedDiv === 1 && <img src={checkMark} className="detailCheckmark" />}
-                        <h4>Janstreet 12, Jancity</h4>
+                        <h4>{user?.address}, {user?.city}</h4>
                     </div>
                     <div
                         className={`confirm-cart-details ${selectedDiv === 2 ? 'selectedCartDetail' : ''}`}
