@@ -1,7 +1,6 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 import RentService from '../services/RentService';
-import { useLocation } from 'react-router-dom';
 import "../pages/RentDetails.css"
 
 const RentDetails = ({userId, rentId, clearSelectedRentId }) => {
@@ -26,7 +25,7 @@ const RentDetails = ({userId, rentId, clearSelectedRentId }) => {
 
   return (
     <div className="rent-detail-page">
-      <button onClick={clearSelectedRentId}>Back to Rent History</button>
+      <button className='rent-detail-back-button' onClick={clearSelectedRentId}>Back to Rent History</button>
       <h2>Detail Page for Rent: {rentId}</h2>
       {rentRowsInformation.map((details) => (
         <div key={details.product.id} className="card-rent-detail">
@@ -34,7 +33,7 @@ const RentDetails = ({userId, rentId, clearSelectedRentId }) => {
             <img src={details.product.files[0].url} alt={details.product.name} />
           </div>
           <div className="details-container">
-            <h3>{details.product.name}</h3>
+            <h2>{details.product.name}</h2>
             <p>startDate: {formatDate(details.rentRow.startDate)} </p>
             <p>EndDate: {formatDate(details.rentRow.endDate)}</p>
             <p>Price: ${details.product.price}</p>
