@@ -3,32 +3,63 @@
 }
 
 .detailPage-profile-user .detailPage-post-content {
-  flex: 1; /* This will ensure that the content takes up half of the flex container */
+  flex: 1;
   display: flex;
-  flex-direction: column; /* Aligns the product information in a column */
-  justify-content: center; /* Centers the product information vertically */
-  align-items: center; /* Centers the product information horizontally */
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
-.detailPage-profile-user .detailPage-post-content img,
-.detailPage-profile-user .detailPage-post-content video {
-  max-width: 145%; /* Ensures that the media does not overflow its container */
-  max-height: 600px;
+.detailPage-profile-user .detailPage-post-content .image-container {
+  border: 2px solid #ddd;
+  padding: 10px;
+  margin: 10px 0;
+  width: 700px; /* Set a fixed width for the image container */
+  height: 600px; /* Set a fixed height for the image container */
+  overflow: hidden; /* Hide any content that exceeds the fixed size */
+}
 
+.detailPage-profile-user .detailPage-post-content .image-container img {
+ 
+  width: 100%; /* Set the width of the image to 100% of the container */
+  height: 580px; /* Allow the image to scale proportionally */
+  display: block;
+  margin-top:10px;
 }
 
 .detailPage-profile-user .detailPage-post-content .detailPage-product-name,
 .detailPage-profile-user .detailPage-post-content .detailPage-product-price,
 .detailPage-profile-user .detailPage-post-content .detailPage-product-description {
-  text-align: center; /* Aligns the text to the center for readability */
+  text-align: center;
 }
-.detailPage-product-name {
-  font-weight: bold; 
-  margin-top: -230px;/* This will make the text bold */
+
+.detailPage-profile-user .detailPage-product-name {
+  font-weight: bold;
+  margin-top: 50px;
 }
-.detailPage-product-description {
-  margin-top:200px;  /* This will make the text bold */
+
+.detailPage-profile-user   .detailPage-product-description {
+  margin-top: 60px;
 }
-.detailPage-product-price {
-  margin-top:20px;  /* This will make the text bold */
+.detailPage-product-rules{
+  margin-top: 100px;
+}
+
+.detailPage-profile-user .detailPage-product-price {
+  margin-top: -20px;
+  margin-right:-500px;
+}
+.detailPage-rent-button{
+  width: 130px;
+  height: 30px;
+  background: #020a4d;
+  font-weight: bolder;
+  border: 2px solid #ededed;
+  border-radius: 11px;
+  letter-spacing: 3px;
+  color: white;
+  font-size: 15px;
+  text-shadow: 1px 0px 8px #8692ee;
+  cursor: pointer;
+  margin-top:100px;
 }

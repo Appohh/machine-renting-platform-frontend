@@ -49,7 +49,7 @@ const getRentHistory = async () => {
 
 const getRentRowsHistory = async (rentId) => {
   const response = await axiosInstance.get(`${hostname}/rent/getRentRow/${rentId}`);
-  const rentProductList = response.data.rentWrapper;
+  const rentProductList = response.data.rentRows;
   console.log("Response rentProductList: ", rentProductList);
 
   const updatedRentProductList = await Promise.all(rentProductList.map(async (item) => {

@@ -42,10 +42,12 @@ function ProductPage() {
       <div className="detailPage-profile-user">
         <div className="detailPage-post-content">
         {foundProduct.files[0] && foundProduct.files[0].type.startsWith("image/") && (
-          <img
-            src={foundProduct.files[0].url}
-            alt={`Product File`}
-          />
+           <div className="image-container">
+           <img
+             src={foundProduct.files[0].url}
+             alt={`Product File`}
+           />
+         </div>
         )}
 
         {foundProduct.files[0] && foundProduct.files[0].type.startsWith("video/") && (
@@ -57,9 +59,19 @@ function ProductPage() {
         </div>
         <div className="detailPage-post-content">
           <div className="detailPage-product-name">{foundProduct.name}</div>
-          <div className="detailPage-product-price">€{foundProduct.price},-</div>
+          <div className="detailPage-product-price">€{foundProduct.price}/day</div>
           <div className="detailPage-product-description">{foundProduct.description}</div>
-          <button onClick={() => handleAddToCart()} className='rent-button'>Add to Cart</button>
+          
+          <button onClick={() => handleAddToCart()} className='detailPage-rent-button'>Add to Cart</button>
+          <div className="detailPage-product-rules">
+              <p>
+                <strong>-Rental Period:</strong> Your rental begins at pickup/delivery and ends at the agreed return time. Late returns may incur additional charges. <br />
+                <strong>-Equipment Usage:</strong> Only trained and authorized individuals should operate the equipment. Use the equipment as intended, following safety regulations. <br />
+                <strong>-Care and Maintenance:</strong> Regular maintenance checks during the rental period are your responsibility. Report any issues promptly for quick resolution. <br />
+                <strong>-Cleaning and Return:</strong> Return the equipment in the condition you received it. Cleaning fees apply for excessively dirty returns. <br />
+                <strong>-Loss or Damage:</strong> You are responsible for any loss, theft, or damage during the rental period. Report incidents immediately.
+              </p>
+            </div>
         </div>
   
         {selectedProduct && (
