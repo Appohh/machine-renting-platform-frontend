@@ -67,8 +67,11 @@ const Catalog = () => {
         setSelectedProduct(product);
     }
 
+
+
     return (
         <>
+
             <div className="filter-container">
                 <input
                     type="text"
@@ -116,6 +119,7 @@ const Catalog = () => {
                             </div>
                             <div className="product-files">
                                 {product.files.map((file, index) => (
+                                    console.log("file", file),
                                     <div className="post-content" key={index}>
                                         <div className='rent-container'>
                                             {/* <button onClick={() => navigate(`/rentpage`, { state: { products: [product.id] } })} className='rent-button'>Rent</button> */}

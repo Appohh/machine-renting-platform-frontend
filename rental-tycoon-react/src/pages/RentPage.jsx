@@ -1,15 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { decodeToken } from 'react-jwt';
-import { useLocation } from 'react-router-dom';
 import RentStep1 from '../components/RentSteps/RentStep1';
 import RentStep2 from '../components/RentSteps/RentStep2';
 import RentStep3 from '../components/RentSteps/RentStep3';
-import RentService2 from '../services/RentService';
+import '../rentPage.css';
 
 
 const RentPage = () => {
-
-    const location = useLocation();
     const [rentStep, setRentStep] = useState(1);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [rentData, setRentData] = useState({
@@ -20,28 +17,26 @@ const RentPage = () => {
         customerId: null,
         products: [],
     });
-    // const { cart } = location.state;
-    const [cart, setCart] = useState([]);
+    const [products, setProducts] = useState([]);
 
-    useEffect(() => {
-        const products = location.state.products;
-        setCart(products);
-    
-        // Retrieve token from localStorage
+    useEffect(() => {    
+        //retrieve token from localStorage
         const accessToken = localStorage.getItem('accessToken');
         setIsLoggedIn(accessToken !== null);
         
-
         if (accessToken) {
             const tokenData = decodeToken(accessToken); 
             if (tokenData && tokenData.userId) {
                 setRentData({ ...rentData, customerId: tokenData.userId });
+            } else {
+                console.log("tokenData.userId not found");
+                setIsLoggedIn(false);
             }
         }
     }, []);
 
-    function step1Next() {
-        setRentData({ ...rentData, products: cart });
+    function step1Next(cartItems) {
+        setRentData({ ...rentData, products: cartItems });
         setRentStep(2);
     }
 
@@ -55,18 +50,6 @@ const RentPage = () => {
     }
 
     function step3Next() {
-        const firstProduct = rentData.products.length > 0 ? rentData.products[0] : null;
-        const updatedRentData = { ...rentData };
-        delete updatedRentData.products;
-        updatedRentData.productId = firstProduct;
-        console.log("updatedRentData", updatedRentData);
-        RentService2.createRent(updatedRentData).then((response) => {
-            console.log(response);
-            setRentStep(4);
-        }).catch((error) => {
-            console.error('Error creating rent:', error);
-            setRentStep(5);
-        });
 
     }
 
@@ -82,7 +65,7 @@ const RentPage = () => {
             case 0:
                 return <div>You have no items selected</div>;
             case 1:
-                return <div className='rent-container1'><RentStep1 cart={cart} step1Next={step1Next} /></div>;
+                return <div className='rent-container1'><RentStep1 step1Next={step1Next} /></div>;
             case 2:
                 return <div className='rent-container1'><RentStep2 setData={step2SetData} step2Next={step2Next} /></div>;
             case 3:

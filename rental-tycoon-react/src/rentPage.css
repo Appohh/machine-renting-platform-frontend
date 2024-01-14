@@ -1,0 +1,24 @@
+.rent-container1 {
+    padding: 2% 8%;
+    background: #a3a3af;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.confirm-cart-container {
+    display: grid;
+    gap: 20px;
+}
+
+.confirm-cart-item {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    background: aliceblue;
+    border-radius: 22px;
+    padding: 0 4%;
+    align-items: center;
+}
+
+.confirm-cart-item button {
+    margin: 11px;
+}
