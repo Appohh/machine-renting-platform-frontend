@@ -40,7 +40,7 @@ const RentStep1 = ({ step1Next }) => {
                   <video src={file.url} controls key={fileIndex} style={{ height: '110px', width: '140px' }} />
                 ) : null;
               })}
-              <button onClick={() => removeFromCart(cartitem)}>Remove</button>
+              <button className='remove-cart-confirm-item' onClick={() => removeFromCart(cartitem)}>Remove</button>
             </div>
           );
         })}

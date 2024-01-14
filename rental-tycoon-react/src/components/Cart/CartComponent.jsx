@@ -2,11 +2,13 @@ import React, { useEffect, useState } from 'react';
 import { useCart } from './CartContext.jsx';
 import './Cart.css';
 import cartPic from '../../assets/images/parts/cart.png';
+import { useNavigate } from 'react-router-dom';
 
 
 const CartComponent = () => {
     const { cart, clearCart, removeFromCart } = useCart(); // import removeFromCart
     const [showCart, setShowCart] = useState(false);
+    const navigate = useNavigate();
 
     useEffect(() => {
         console.log('cart', cart);
@@ -57,7 +59,7 @@ const CartComponent = () => {
             </div>
             <div className='cart-button-container'>
                 <button onClick={clearCart}>Clear</button>
-                <button>Checkout</button>
+                <button onClick={() => {navigate("/rentPage")}}>Checkout</button>
             </div>
         </div>
     );

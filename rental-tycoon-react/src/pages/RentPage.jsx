@@ -10,14 +10,13 @@ const RentPage = () => {
     const [rentStep, setRentStep] = useState(1);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [rentData, setRentData] = useState({
-        startDate: '',
-        endDate: '',
         address: '',
         city: '',
         customerId: null,
         products: [],
     });
     const [products, setProducts] = useState([]);
+    let userIdCurrent = null;
 
     useEffect(() => {    
         //retrieve token from localStorage
@@ -28,6 +27,8 @@ const RentPage = () => {
             const tokenData = decodeToken(accessToken); 
             if (tokenData && tokenData.userId) {
                 setRentData({ ...rentData, customerId: tokenData.userId });
+                console.log("tokenData.userId", tokenData);
+                userIdCurrent = tokenData.userId;
             } else {
                 console.log("tokenData.userId not found");
                 setIsLoggedIn(false);
@@ -67,7 +68,7 @@ const RentPage = () => {
             case 1:
                 return <div className='rent-container1' style={{ gridTemplateColumns: '1fr' }}><RentStep1 step1Next={step1Next} /></div>;
             case 2:
-                return <div className='rent-container1'><RentStep2 setData={step2SetData} step2Next={step2Next} productList={rentData.products} /></div>;
+                return <div className='rent-container1'><RentStep2 setData={step2SetData} step2Next={step2Next} productList={rentData.products} userId={userIdCurrent} /></div>;
             case 3:
                 console.log("rentdata3", rentData)
                 return <RentStep3 cart={cart} step3Next={step3Next} />;

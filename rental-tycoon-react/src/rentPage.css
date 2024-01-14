@@ -3,11 +3,25 @@
     background: #a3a3af;
     display: grid;
     grid-template-columns: 1fr 1fr;
+    gap: 33px;
+}
+
+.confirm-cart-button-container {
+    display: flex;
+    justify-content: flex-end;
 }
 
 .confirm-cart-container {
     display: grid;
     gap: 20px;
+}
+
+.confirm-cart-button-container button {
+    padding: 0.7% 4%;
+    background: #254bac;
+    color: white;
+    font-weight: 700;
+    cursor: pointer;
 }
 
 .confirm-cart-item {
@@ -17,8 +31,77 @@
     border-radius: 22px;
     padding: 0 4%;
     align-items: center;
+    justify-items: center;
 }
 
 .confirm-cart-item button {
     margin: 11px;
+}
+
+.remove-cart-confirm-item {
+    padding: 1.7% 4%;
+    background: #254bac;
+    color: white;
+    font-weight: 700;
+    width: 140px;
+    margin: auto;
+    cursor: pointer;
+}
+
+.confirm-cart-details-wrap {
+    display: grid;
+    height: 100%;
+    gap: 18px;
+}
+
+.confirm-cart-details {
+    background: white;
+    border-top: 10px solid #020a4d;
+    padding: 1% 4%;
+    position: relative;
+    cursor: pointer;
+}
+
+img.detailCheckmark {
+    position: absolute;
+    top: -12%;
+    background: white;
+    right: -2%;
+    border-radius: 41px;
+    height: 40px;
+}
+
+.confirm-cart-details-inputs div {
+    display: flex;
+    gap: 11px;
+    flex-direction: column;
+    margin: 14px;
+}
+
+.confirm-cart-details-inputs input {
+    width: 100%;
+    padding: 2% 6%;
+    box-sizing: border-box;
+}
+
+.confirm-cart-details-inputs button[type="submit"] {
+    padding: 0.7% 3%;
+    background: #254bac;
+    color: white;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.confirm-step2-button-container {
+    grid-column: 2;
+    margin-left: auto;
+}
+
+.confirm-step2-button-container button {
+    padding: 5.7% 4%;
+    background: #254bac;
+    color: white;
+    font-weight: 700;
+    cursor: pointer;
+    width: 157px;
 }
