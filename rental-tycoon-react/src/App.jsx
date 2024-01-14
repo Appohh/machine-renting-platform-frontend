@@ -40,7 +40,14 @@ function App() {
             </Routes>
           </div>
         </Router>
-        <div className="footer"></div>
+        <div className="footer">
+           {/* make this to be placed on the right side */}
+           <ul><a href="/">Home</a></ul>
+          <ul><a href="/catalog">Catalog</a></ul>
+        <h3>Contact Us</h3>
+            <p>Phone: 1234567</p>
+            <p>Email: Rental.Tycoon@gmail.com</p>
+        </div>
       </div>
     </>
   )
