@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useJwt } from 'react-jwt';
 import UserService from '../services/UserService';
 import LocalStorageService from '../services/LocalStorageService';
-import './UpdateProfilePage.css';
+import './UpdateProfile.css';
 import { useNavigate } from 'react-router-dom';
 
 function UpdateProfilePage() {
@@ -11,6 +11,7 @@ function UpdateProfilePage() {
   const [user, setUser] = useState(null);
   const token = LocalStorageService.get();
   const { decodedToken } = useJwt(token || "");
+  const [isEditable, setIsEditable] = useState(false);
 
   useEffect(() => {
     if (decodedToken) {
@@ -37,11 +38,8 @@ function UpdateProfilePage() {
     navigate("/profilePage");
   };
 
-  // Add a function to handle form submission and update the user details
   const handleSubmit = async () => {
-
     console.log(user)
-
     try {
       // Assuming user state has all the updated details
       await UserService.updateUserDetails(
@@ -62,6 +60,10 @@ function UpdateProfilePage() {
     }
   };
 
+  const toggleEditable = () => {
+    setIsEditable(!isEditable);
+  };
+
   return (
     <div className="profile-page">
       {user && (
@@ -72,6 +74,7 @@ function UpdateProfilePage() {
             name="firstName"
             value={user.firstName}
             onChange={handleChange}
+            readOnly={!isEditable}
           />
 
           <label>Last Name:</label>
@@ -80,6 +83,7 @@ function UpdateProfilePage() {
             name="lastName"
             value={user.lastName}
             onChange={handleChange}
+            readOnly={!isEditable}
           />
 
           <label>Address:</label>
@@ -88,6 +92,7 @@ function UpdateProfilePage() {
             name="address"
             value={user.address}
             onChange={handleChange}
+            readOnly={!isEditable}
           />
 
           <label>City:</label>
@@ -96,6 +101,7 @@ function UpdateProfilePage() {
             name="city"
             value={user.city}
             onChange={handleChange}
+            readOnly={!isEditable}
           />
 
           <label>Email:</label>
@@ -104,6 +110,7 @@ function UpdateProfilePage() {
             name="email"
             value={user.email}
             onChange={handleChange}
+            readOnly={!isEditable}
           />
 
           <label>Phone:</label>
@@ -112,9 +119,14 @@ function UpdateProfilePage() {
             name="phone"
             value={user.phone}
             onChange={handleChange}
+            readOnly={!isEditable}
           />
         </div>
       )}
+
+      <div className="edit-button" onClick={toggleEditable}>
+        {isEditable ? 'Confirm' : 'Edit Profile'}
+      </div>
 
       <div className="submit" onClick={handleCancel}>
         Cancel

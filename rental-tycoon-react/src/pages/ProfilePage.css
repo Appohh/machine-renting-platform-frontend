@@ -62,6 +62,7 @@
   align-items: center;
   gap: 14px;
   justify-content: center;
+  margin: 20px;
 }
 
 .account-sidebar-links button {

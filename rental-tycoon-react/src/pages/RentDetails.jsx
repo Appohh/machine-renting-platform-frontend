@@ -4,11 +4,7 @@ import RentService from '../services/RentService';
 import { useLocation } from 'react-router-dom';
 import "../pages/RentDetails.css"
 
-const RentDetails = () => {
-  const location = useLocation();
-  const searchParams = new URLSearchParams(location.search);
-  const userId = searchParams.get('userId');
-  const rentId = searchParams.get('rentId');
+const RentDetails = ({userId, rentId, clearSelectedRentId }) => {
   const [rentRowsInformation, setRentRowsInformation] = useState([]);
 
   useEffect(() => {
@@ -30,6 +26,7 @@ const RentDetails = () => {
 
   return (
     <div className="rent-detail-page">
+      <button onClick={clearSelectedRentId}>Back to Rent History</button>
       <h2>Detail Page for Rent: {rentId}</h2>
       {rentRowsInformation.map((details) => (
         <div key={details.product.id} className="card-rent-detail">

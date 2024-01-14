@@ -9,7 +9,6 @@ import Catalog from "./pages/Catalog";
 import RentPage from "./pages/RentPage";
 import LoginPage from "./pages/LoginPage";
 import ProfilePage from "./pages/ProfilePage";
-import UpdateProfilePage from "./pages/UpdateProfilePage";
 import RentHistory from "./pages/RentHistory";
 import RegisterUser from "./pages/RegisterUser";
 import CartComponent from "./components/Cart/CartComponent";
@@ -36,7 +35,6 @@ function App() {
               <Route path="/catalog" element={<Catalog />} />
               <Route path="/rentpage" element={<RentPage />} />
               <Route path="/ProfilePage" element={<ProfilePage />} />
-              <Route path="/UpdateProfilePage" element={<UpdateProfilePage />} />
               <Route path="/History/:userId" element={<RentHistory />} />
               <Route path="/RentDetails" element={<RentDetails />} />
             </Routes>
