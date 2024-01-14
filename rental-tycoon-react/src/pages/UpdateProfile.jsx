@@ -16,6 +16,11 @@ function UpdateProfilePage() {
   useEffect(() => {
     if (decodedToken) {
       const userId = decodedToken.userId;
+      retrieveUser(userId);
+    }
+  }, [decodedToken]);
+
+  const retrieveUser = (userId) => {
       UserService.getUserById(userId)
         .then((response) => {
           setUser(response);
@@ -24,7 +29,7 @@ function UpdateProfilePage() {
           console.error(error);
         });
     }
-  }, [decodedToken]);
+  
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -35,11 +40,33 @@ function UpdateProfilePage() {
   };
 
   const handleCancel = () => {
-    navigate("/profilePage");
+    setIsEditable(false);
+    retrieveUser(user.id)
+  };
+
+  const renderButtons = () => {
+    if (isEditable) {
+      return (
+        <div className='profile-page-confirm-cancel-button'>
+          <div className="cancel-button" onClick={handleCancel}>
+            Cancel
+          </div>
+          <div className="confirm-button" onClick={handleSubmit}>
+            Confirm Changes
+          </div>
+        </div>
+      );
+    } else {
+      return (
+        <div className="edit-button" onClick={toggleEditable}>
+          Edit Profile
+        </div>
+      );
+    }
   };
 
   const handleSubmit = async () => {
-    console.log(user)
+    console.log(user);
     try {
       // Assuming user state has all the updated details
       await UserService.updateUserDetails(
@@ -51,9 +78,8 @@ function UpdateProfilePage() {
         user.email,
         user.phone
       );
-      // Optionally, you can update the local user state if needed
-      // setUser(updatedUser);
-      console.log("Success changes")
+      setIsEditable(false);
+      console.log("Success changes");
     } catch (error) {
       console.error("Error updating user details:", error);
       // Handle error if needed
@@ -62,80 +88,83 @@ function UpdateProfilePage() {
 
   const toggleEditable = () => {
     setIsEditable(!isEditable);
+    
   };
 
   return (
     <div className="profile-page">
+      <h1>User Details</h1>
       {user && (
         <div>
-          <label>First Name:</label>
-          <input
-            type="text"
-            name="firstName"
-            value={user.firstName}
-            onChange={handleChange}
-            readOnly={!isEditable}
-          />
+          <div className='profile-page-box-firstName-lastName'>
+            <div className='profile-page-box-firstName'>
+              <label>First Name:</label>
+              <input
+                type="text"
+                name="firstName"
+                value={user.firstName}
+                onChange={handleChange}
+                readOnly={!isEditable}
+              />
+              </div>
+              <div className='profile-page-box-firstName'>
+              <label>Last Name:</label>
+              <input
+                type="text"
+                name="lastName"
+                value={user.lastName}
+                onChange={handleChange}
+                readOnly={!isEditable}
+              />
+            </div> 
+          </div>
 
-          <label>Last Name:</label>
-          <input
-            type="text"
-            name="lastName"
-            value={user.lastName}
-            onChange={handleChange}
-            readOnly={!isEditable}
-          />
+          <div className='profile-page-box-email'>
+            <label>Email:</label>
+            <input
+              type="text"
+              name="email"
+              value={user.email}
+              onChange={handleChange}
+              readOnly={!isEditable}
+            />
+          </div>
 
-          <label>Address:</label>
-          <input
-            type="text"
-            name="address"
-            value={user.address}
-            onChange={handleChange}
-            readOnly={!isEditable}
-          />
+          <div className='profile-page-box-address'>
+            <label>Address:</label>
+            <input
+              type="text"
+              name="address"
+              value={user.address}
+              onChange={handleChange}
+              readOnly={!isEditable}
+            />
+          </div>
 
-          <label>City:</label>
-          <input
-            type="text"
-            name="city"
-            value={user.city}
-            onChange={handleChange}
-            readOnly={!isEditable}
-          />
+          <div className='profile-page-box-city'>
+            <label>City:</label>
+            <input
+              type="text"
+              name="city"
+              value={user.city}
+              onChange={handleChange}
+              readOnly={!isEditable}
+            />
+          </div>
 
-          <label>Email:</label>
-          <input
-            type="text"
-            name="email"
-            value={user.email}
-            onChange={handleChange}
-            readOnly={!isEditable}
-          />
-
-          <label>Phone:</label>
-          <input
-            type="text"
-            name="phone"
-            value={user.phone}
-            onChange={handleChange}
-            readOnly={!isEditable}
-          />
+          <div className='profile-page-box-phone'>
+            <label>Phone:</label>
+            <input
+              type="text"
+              name="phone"
+              value={user.phone}
+              onChange={handleChange}
+              readOnly={!isEditable}
+            />
+          </div>
+          {renderButtons()}
         </div>
       )}
-
-      <div className="edit-button" onClick={toggleEditable}>
-        {isEditable ? 'Confirm' : 'Edit Profile'}
-      </div>
-
-      <div className="submit" onClick={handleCancel}>
-        Cancel
-      </div>
-
-      <div className='submit-container'>
-        <div className="submit" onClick={handleSubmit}>Submit changes</div>
-      </div>
-
     </div>
   );
 }

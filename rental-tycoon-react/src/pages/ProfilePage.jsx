@@ -31,7 +31,7 @@
     const renderSection = () => {
       switch (currentSection) {
         case 'updateProfile':
-          return <UpdateProfile user={user} setUser={setUser} />;
+          return <UpdateProfile/>;
         case 'rentHistory':
           return <RentHistory userId={user?.id}/>;
         default:

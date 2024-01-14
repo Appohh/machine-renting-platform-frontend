@@ -1,3 +1,39 @@
+.profile-page {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+
+.profile-page-box-firstName-lastName{
+  display: flex;
+  gap: 10px;
+}
+
+.profile-page-box-firstName,
+.profile-page-box-lastName,
+.profile-page-box-email,
+.profile-page-box-address,
+.profile-page-box-city,
+.profile-page-box-phone{
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+}
+
+
+.profile-page-box-firstName-lastName input[type='text'],
+.profile-page-box-email input[type='text'],
+.profile-page-box-address input[type='text'],
+.profile-page-box-city input[type='text'],
+.profile-page-box-phone input[type='text'] {
+  font-size: 30px;
+  width: 100%;
+  padding: 10px; 
+  box-sizing: border-box; 
+  margin-bottom: 10px;
+}
+
 .submit-container {
     display: flex;
     gap: 30px;
@@ -20,20 +56,48 @@
   }
 
   .edit-button {
-    display: inline-block;
+    width: 50%;
     padding: 5px 10px;
     margin-top: 10px;
-    margin-right: 10px;
-    background-color: #007bff;
-    color: white;
+    background-color: white;
+    color: black;
+    border: 1.5px solid black;
     text-align: center;
     text-decoration: none;
-    border-radius: 3px;
-    cursor: pointer;
+    border-radius: 5px;
+    margin-left: auto;
+    margin-right: 10px;
+    font-size: 20px;
   }
 
   
   
   .edit-button:hover {
-    background-color: #0069d9;
+    box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.15);
+  }
+
+  .profile-page-confirm-cancel-button{
+    display: flex;
+  }
+
+  .cancel-button{
+    background-color: #CD6F6F;
+    border: 1.5px solid ;
+    padding: 10px;
+    width: 20%;
+    margin-right: auto;
+    margin-left: 10px;
+    border-radius: 15px;
+    text-align: center;
+  }
+
+  .confirm-button{
+    background-color: #7CCD6F;
+    border: 1.5px solid ;
+    padding: 10px;
+    width: 50%;
+    margin-right: 10px;
+    margin-left: auto;
+    border-radius: 15px;
+    text-align: center;
   }
