@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import ProductService from '../../services/ProductService'
 import UserService from '../../services/UserService.js'
 
-const RentStep3 = ({ step3Next, userId, productList, cart }) => {
+const RentStep3 = ({ step3Next, userId, productList, cart, rentInfo }) => {
     const [user, setUser] = useState(null);
     const [products, setProducts] = useState([]);
     const [cartItems, setCartItems] = useState([]);
@@ -77,7 +77,7 @@ const RentStep3 = ({ step3Next, userId, productList, cart }) => {
                 <h3>Deliver at my address</h3>
                 <h4>{user?.firstName} {user?.lastName}</h4>
                 {/* TODO: get selected adress details */}
-                <h4>{user?.address}, {user?.city}</h4>
+                <h4>{rentInfo?.address}, {rentInfo?.city}</h4>
             </div>
 
             <div className='order-receipt-container'>

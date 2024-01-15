@@ -60,8 +60,11 @@ const RentPage = () => {
 
     function step2SetData(data) {
         setRentData({ ...rentData, ...data });
-        console.log("rentdata", rentData);
     }
+
+    useEffect(() => {
+        console.log("rentData122", rentData);
+    }, [rentData]);
 
     function step3Next(total, discount) {
         rentData.total = total;
@@ -108,7 +111,7 @@ const RentPage = () => {
                 return <div className='rent-container1'><RentStep2 setData={step2SetData} step2Next={step2Next} productList={rentData.products} userId={userIdCurrent} /></div>;
             case 3:
                 console.log("rentdata3", rentData)
-                return <div className='rent-container1' style={{ gridTemplateColumns: '1fr 1fr 1fr' }}><RentStep3 productList={rentData.products} userId={userIdCurrent} step3Next={step3Next} cart={cartShadow} /></div>;
+                return <div className='rent-container1' style={{ gridTemplateColumns: '1fr 1fr 1fr' }}><RentStep3 productList={rentData.products} userId={userIdCurrent} step3Next={step3Next} cart={cartShadow} rentInfo={rentData} /></div>;
             case 4:
                 return <div className='rent-container1'><div>Thank you for your rent!</div></div>;
             case 5:
