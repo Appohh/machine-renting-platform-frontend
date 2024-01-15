@@ -61,8 +61,12 @@ const RentPage = () => {
         console.log("rentdata", rentData);
     }
 
-    function step3Next() {
-
+    function step3Next(total, discount) {
+        rentData.total = total;
+        rentData.discount = discount;
+        delete rentData.products;
+        console.log("Step3-rentData", rentData);
+        //todo: send data to backend
     }
 
     useEffect(() => {

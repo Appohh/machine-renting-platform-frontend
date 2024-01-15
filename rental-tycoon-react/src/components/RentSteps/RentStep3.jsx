@@ -13,7 +13,7 @@ const RentStep3 = ({ step3Next, userId, productList, cart }) => {
     const [discount, setDiscount] = useState(0);
 
     const handleConfirmRent = () => {
-        step3Next();
+        step3Next(totalPrice, discount);
     };
 
     useEffect(() => {
