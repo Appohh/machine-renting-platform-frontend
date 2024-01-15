@@ -69,20 +69,21 @@ const RentPage = () => {
         rentData.customerId = userIdCurrent;
         delete rentData.products;
     
-        console.log("Step3-rentData", rentData);
         RentService.createRent(rentData)
-            .then((response) => cartShadow.map((product) => {
-                const rentRowData = {
-                    productId: product.product.id,
-                    startDate: product.startDate,
-                    endDate: product.endDate,
-                    rentId: response.rentId
-                };
-        
-                RentService.addRentRow(rentRowData)
-                    .then(console.log("Successfull"))
-            }))
-        };
+            .then((response) => {
+                cartShadow.map((product) => {
+                    const rentRowData = {
+                        productId: product.product.id,
+                        startDate: product.startDate,
+                        endDate: product.endDate,
+                        rentId: response.rentId
+                    };
+    
+                    RentService.addRentRow(rentRowData)
+                        .then(() => { window.location.href = '/success'; });
+                });
+            });
+    }
         
 
     useEffect(() => {
