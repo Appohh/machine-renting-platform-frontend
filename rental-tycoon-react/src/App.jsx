@@ -44,12 +44,22 @@ function App() {
         </Router>
         <div className="footer">
            {/* make this to be placed on the right side */}
+           <div className="footer_home">
            <ul><a href="/">Home</a></ul>
-          <ul><a href="/catalog">Catalog</a></ul>
-        <h3>Contact Us</h3>
+          <ul><a href="/catalog">Catalog</a></ul>  
+           </div>
+
+           <div className="footer_contact">
+         <h3>Contact Us</h3>
             <p>Phone: 1234567</p>
             <p>Email: Rental.Tycoon@gmail.com</p>
+            <p>© 2024 Rental tycoon. All rights reserved.</p>
+            </div>
         </div>
+
+        
+      
+
       </div>
     </>
   )

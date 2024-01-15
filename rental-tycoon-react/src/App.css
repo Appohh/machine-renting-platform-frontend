@@ -258,3 +258,43 @@ input[type="date"] {
   width: 400px;
 }
 
+/* Styles for the footer */
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #020a4d;
+  color: #fff;
+  padding: 20px;
+}
+
+/* Styles for the home and catalog links */
+.footer_home {
+  display: flex;
+  gap: 20px;
+}
+
+.footer_home ul {
+  list-style: none;
+}
+
+.footer_home a {
+  text-decoration: none;
+  color: #fff;
+  font-weight: bold; /* Optional: Make the links bold */
+}
+
+/* Styles for the contact information */
+.footer_contact {
+  text-align: right;
+}
+
+.footer_contact h3 {
+  color: #fff;
+  margin-bottom: 10px;
+}
+
+.footer_contact p {
+  margin: 5px 0;
+}
+
