@@ -25,7 +25,6 @@ async function addRentRow(rentRowData) {
     startDate: rentRowData.startDate,
     endDate: rentRowData.endDate,
     rentId: rentRowData.rentId,
-    quantity: rentRowData.quantity
   }
   try {
     const response = await axiosInstance.post(`${hostname}/rent/addRentRow`, requestBody);

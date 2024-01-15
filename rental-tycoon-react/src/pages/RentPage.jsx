@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { decodeToken } from 'react-jwt';
+import RentService from '../services/RentService'
 import RentStep1 from '../components/RentSteps/RentStep1';
 import RentStep2 from '../components/RentSteps/RentStep2';
 import RentStep3 from '../components/RentSteps/RentStep3';
@@ -19,6 +20,7 @@ const RentPage = () => {
     const [cartShadow, setCartShadow] = useState([]);
     const [userIdCurrent, setUserIdCurrent] = useState(null);
     const { cart } = useCart();
+    const [rentId, setRentId] = useState();
 
     useEffect(() => {    
         //retrieve token from localStorage
@@ -64,10 +66,29 @@ const RentPage = () => {
     function step3Next(total, discount) {
         rentData.total = total;
         rentData.discount = discount;
+        rentData.customerId = userIdCurrent;
         delete rentData.products;
+    
         console.log("Step3-rentData", rentData);
-        //todo: send data to backend
-    }
+        RentService.createRent(rentData)
+            .then((response) => cartShadow.map((product) => {
+                const rentRowData = {
+                    productId: product.product.id,
+                    startDate: product.startDate,
+                    endDate: product.endDate,
+                    rentId: response.rentId
+                };
+        
+                RentService.addRentRow(rentRowData)
+                    .then(console.log("Successfull"))
+            }))
+        };
+        
+
+    useEffect(() => {
+     console.log("Cart shadowwww: ", cartShadow)
+    })
+
 
     useEffect(() => {
         console.log("RentData updated:", rentData);
