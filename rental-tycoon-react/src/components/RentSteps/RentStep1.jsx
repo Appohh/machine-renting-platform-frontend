@@ -15,10 +15,20 @@ const RentStep1 = ({ step1Next }) => {
 
     fetchProductDetails();
   }, [cart]);
-
+  const calculateDays = (startDate, endDate) => {
+    return (new Date(endDate) - new Date(startDate)) / (1000 * 60 * 60 * 24);
+};
   useEffect(() => {
     console.log("cartItems", cartItems);
   }, [cartItems]);
+  const calculateTotalCost = () => {
+    let totalCost = 0;
+    cart.forEach(cartitem => {
+        const days = calculateDays(cartitem.startDate, cartitem.endDate);
+        totalCost += days * cartitem.product.price;
+    });
+    return totalCost.toFixed(2);
+};
 
   const handleStepNext = () => {
     step1Next(cartItems);

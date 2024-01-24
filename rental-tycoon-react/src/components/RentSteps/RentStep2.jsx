@@ -1,5 +1,6 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
+import { useCart } from '../Cart/CartContext';
 import checkMark from '../../assets/images/parts/blue-check.png';
 import { useRef } from 'react';
 import UserService from '../../services/UserService.js'
@@ -12,6 +13,7 @@ const RentStep2 = ({ setData, step2Next, productList, userId }) => {
     const [selectedDiv, setSelectedDiv] = useState(1);
     const input1 = useRef(null);
     const input2 = useRef(null);
+    const { cart, removeFromCart } = useCart();
     const [input1Style, setInput1Style] = useState({});
     const [input2Style, setInput2Style] = useState({});
     const [user, setUser] = useState(null);
@@ -26,6 +28,31 @@ const RentStep2 = ({ setData, step2Next, productList, userId }) => {
             console.log("userId not found");
         }
     }, [userId]);
+    const calculateTotalCost = () => {
+        let totalCost = 0;
+        cart.forEach(cartitem => {
+            const days = calculateDays(cartitem.startDate, cartitem.endDate);
+            totalCost += days * cartitem.product.price;
+        });
+        return totalCost.toFixed(2);
+    };
+    const getStartDate = () => {
+        let startDate = "";  // Use let instead of const
+        cart.forEach(cartitem => {
+            startDate = cartitem.startDate;
+        });
+        return startDate;
+    }
+    const getEndDate = () => {
+        let endDate = "";  // Use let instead of const
+        cart.forEach(cartitem => {
+            endDate = cartitem.endDate;
+        });
+        return endDate;
+    }
+    const calculateDays = (startDate, endDate) => {
+        return (new Date(endDate) - new Date(startDate)) / (1000 * 60 * 60 * 24);
+    };
 
     const confirmData = () => {
 
@@ -69,11 +96,12 @@ const RentStep2 = ({ setData, step2Next, productList, userId }) => {
     return (
         <>
             <div className='confirm-cart-container' >
-                {productList.map((cartitem, index) => {
+                {productList.map((cartitem, index) => {    
                     return (
                         <div className='confirm-cart-item' style={{ gridTemplateColumns: '1fr 1fr 1fr' }} key={index}>
                             <h3>{cartitem.name}</h3>
-                            <h3>€{cartitem.price}</h3>
+                            <h3>€{calculateTotalCost()}</h3>
+                           
                             {cartitem.files.map((file, fileIndex) => {
                                 console.log("file", file);
                                 return file.type.startsWith('image/') ? (
@@ -82,6 +110,9 @@ const RentStep2 = ({ setData, step2Next, productList, userId }) => {
                                     <video src={file.url} controls key={fileIndex} style={{ height: '110px', width: '140px' }} />
                                 ) : null;
                             })}
+                                <h4>Start Date: {getStartDate()}</h4> 
+                                <h4>End Date: {getEndDate()}</h4> 
+                            
                         </div>
                     );
                 })}

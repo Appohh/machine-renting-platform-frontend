@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import UserService from '../../services/UserService.js'
+import { useCart } from '../Cart/CartContext';
 import RentService from '../../services/RentService.js';
 
 const RentStep3 = ({ step3Next, userId, productList, cart, rentInfo }) => {
@@ -14,14 +15,22 @@ const RentStep3 = ({ step3Next, userId, productList, cart, rentInfo }) => {
     const [code, setCode] = useState("");
     const [responseCode, setResponseCode] = useState("");
     const [message, setMessage] = useState("");
-
+    
     const handleConfirmRent = () => {
         step3Next(totalPrice, discount);
+    };
+    const calculateTotalCost = () => {
+        let totalCost = 0;
+        cart.forEach(cartitem => {
+            const days = calculateDays(cartitem.startDate, cartitem.endDate);
+            totalCost += days * cartitem.product.price;
+        });
+        return totalCost.toFixed(2);
     };
 
     const handleCreateDiscount = () => {
         try {
-            const total = subtotal + vat;
+            const total = subtotal;
             RentService.getDiscountAmount(total, code).then((data) => {
                 setDiscount(data.discountAmount);
                 setResponseCode(data.code);
@@ -73,14 +82,47 @@ const RentStep3 = ({ step3Next, userId, productList, cart, rentInfo }) => {
             console.log("userId not found");
         }
     }, [userId]);
+    const calculateDays = (startDate, endDate) => {
+        return (new Date(endDate) - new Date(startDate)) / (1000 * 60 * 60 * 24);
+    };
+    const getStartDate = () => {
+        let startDate = "";  // Use let instead of const
+        cart.forEach(cartitem => {
+            startDate = cartitem.startDate;
+        });
+        return startDate;
+    }
+    const getEndDate = () => {
+        let endDate = "";  // Use let instead of const
+        cart.forEach(cartitem => {
+            endDate = cartitem.endDate;
+        });
+        return endDate;
+    }
 
     useEffect(() => {
-        const total = cartItems.reduce((sum, item) => sum + item.product.price, 0);
-        setTotalPrice(total);
-        const sub = total + deliveryCost;
-        setSubtotal(sub);
-        setVat(sub * 0.2);
+        try {
+            const totalCost = parseFloat(calculateTotalCost());
+            const deliveryCostValue = parseFloat(deliveryCost);
+    
+            // Calculate VAT separately
+            const vatValue = (totalCost + deliveryCostValue) * 0.2;
+    
+            // Add VAT to totalCost and deliveryCost
+            const totalWithVat = totalCost + vatValue;
+            const subWithVatValue = totalWithVat + deliveryCostValue;
+    
+            setTotalPrice(totalCost.toFixed(2));
+            setVat(vatValue.toFixed(2));
+            setSubtotal(subWithVatValue.toFixed(2));
+        } catch (error) {
+            console.error("Error in useEffect:", error);
+        }
     }, [cartItems, deliveryCost]);
+    
+    
+    
+    
 
     
 
@@ -91,7 +133,7 @@ const RentStep3 = ({ step3Next, userId, productList, cart, rentInfo }) => {
                     return (
                         <div className='confirm-cart-item' style={{ gridTemplateColumns: '1fr 1fr 1fr' }} key={index}>
                             <h3>{cartitem.name}</h3>
-                            <h3>€{cartitem.price}</h3>
+                            <h3>€{calculateTotalCost()}</h3>
                             {cartitem.files.map((file, fileIndex) => {
                                 console.log("file", file);
                                 return file.type.startsWith('image/') ? (
@@ -100,6 +142,9 @@ const RentStep3 = ({ step3Next, userId, productList, cart, rentInfo }) => {
                                     <video src={file.url} controls key={fileIndex} style={{ height: '110px', width: '140px' }} />
                                 ) : null;
                             })}
+                            
+                            <h4>Start Date: {getStartDate()}</h4> 
+                                <h4>End Date: {getEndDate()}</h4> 
                         </div>
                     );
                 })}
@@ -148,7 +193,7 @@ const RentStep3 = ({ step3Next, userId, productList, cart, rentInfo }) => {
                             </>
                         )}
                     <h3>Total</h3>
-                    <h3>€{subtotal + vat - discount}</h3>
+                    <h3>€{subtotal - discount}</h3>
                 </div>
             </div>
             <div className='rent-step3-button'>
