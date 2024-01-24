@@ -12,19 +12,31 @@ const RentStep3 = ({ step3Next, userId, productList, cart, rentInfo }) => {
     const [vat, setVat] = useState(0);
     const [discount, setDiscount] = useState(0);
     const [code, setCode] = useState("");
+    const [responseCode, setResponseCode] = useState("");
+    const [message, setMessage] = useState("");
 
     const handleConfirmRent = () => {
         step3Next(totalPrice, discount);
     };
 
     const handleCreateDiscount = () => {
-        try{
+        try {
             const total = subtotal + vat;
             RentService.getDiscountAmount(total, code).then((data) => {
-                setDiscount(data.discountAmount)
-            })
-        }catch{
+                setDiscount(data.discountAmount);
+                setResponseCode(data.code);
+                setCode("");
+                setMessage(""); 
+            }).catch(() => {
+                setDiscount(0);
+                setResponseCode(code)
+                setCode("");
+                setMessage("Invalid discount: ");
+            });
+        } catch (error) {
             setDiscount(0);
+            setCode("");
+            setMessage("Invalid discount: ");
         }
     }
 
@@ -121,10 +133,16 @@ const RentStep3 = ({ step3Next, userId, productList, cart, rentInfo }) => {
                             }}
                     />
                     <button className='discount-submit' onClick={handleCreateDiscount}>Ok</button>
+                    {message && (
+                        <>
+                            <p className="discount-error-message">{message}</p>
+                            <p className="discount-error-message">{responseCode}</p>
+                        </>
+                    )}
                     {discount !== 0 && (
                             <>
                                 <button onClick={handleRemoveDiscount} className='receipt-remove-discount'>Remove discount code:</button>
-                                <button onClick={handleRemoveDiscount} className='receipt-remove-discount'> {code}</button>
+                                <button onClick={handleRemoveDiscount} className='receipt-remove-discount'> {responseCode}</button>
                                 <h3 className='receipt-discount'>Discount</h3>
                                 <h3 className='receipt-discount'>€{discount}</h3>
                             </>

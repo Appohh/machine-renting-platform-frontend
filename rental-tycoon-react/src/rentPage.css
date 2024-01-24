@@ -185,3 +185,10 @@ h3.vat-total {
     text-align: left;
     cursor: pointer;
 }
+
+.discount-error-message{
+    color: crimson;
+    text-decoration: underline;
+    font-size: 15px;
+    border-bottom: 3px solid black;
+}
