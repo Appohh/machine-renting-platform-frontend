@@ -64,9 +64,19 @@ const getRentRowsHistory = async (rentId) => {
   return updatedRentProductList;
 }
 
+const getDiscountAmount = async(total, code) => {
+  const requestBody = {
+    total: total,
+    code: code,
+  }
+  const response = await axiosInstance.post(`${hostname}/discount`, requestBody)
+  return response.data;
+}
+
 export default {
   createRent,
   addRentRow,
   getRentHistory,
-  getRentRowsHistory
+  getRentRowsHistory,
+  getDiscountAmount
 };

@@ -155,3 +155,33 @@ h3.vat-total {
     cursor: pointer;
     width: 157px;
 }
+
+.discount-input{
+    padding: 5px;
+}
+
+.discount-submit{
+    width: 50%;
+    background: #254bac;
+    color: white;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.sub-total{
+    border-bottom: 3px solid;
+}
+
+.receipt-discount{
+    border-bottom: 3px solid;;
+}
+
+.receipt-remove-discount{
+    font-size: 15px;
+    text-decoration: underline;
+    color:crimson;
+    border: none;
+    background-color: transparent;
+    text-align: left;
+    cursor: pointer;
+}
