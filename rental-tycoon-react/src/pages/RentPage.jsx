@@ -114,8 +114,8 @@ const RentPage = () => {
         };
 
         Email.send(emailData).then(
-            message => alert(`Email sent successfully: ${message}`),
-            error => alert(`Error sending email: ${error}`)
+            message => console.log(`Email sent successfully: ${message}`),
+            error => console.log(`Error sending email: ${error}`)
         );
     };
 
