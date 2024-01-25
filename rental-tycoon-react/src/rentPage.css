@@ -193,3 +193,9 @@ h3.vat-total {
     font-size: 15px;
     border-bottom: 3px solid black;
 }
+
+.receipt-total-discounted {
+    display: flex;
+    gap: 13px;
+    align-items: center;
+}
