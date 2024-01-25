@@ -153,6 +153,11 @@ const RentPage = () => {
 
     return (
         <div>
+            <style>{`
+                .cart-container {
+                    display: none !important;
+                }
+            `}</style>
             <h1 style={{ marginLeft: '8%', width: '500px' }}>Rent Page</h1>
             {renderRentStep()}
         </div>
