@@ -12,6 +12,7 @@ const RentStep2 = ({ setData, step2Next, productList, userId }) => {
     });
     const [selectedDiv, setSelectedDiv] = useState(1);
     const input1 = useRef(null);
+    const [cartItems, setCartItems] = useState([]);
     const input2 = useRef(null);
     const { cart, removeFromCart } = useCart();
     const [input1Style, setInput1Style] = useState({});
@@ -28,23 +29,44 @@ const RentStep2 = ({ setData, step2Next, productList, userId }) => {
             console.log("userId not found");
         }
     }, [userId]);
-    const calculateTotalCost = () => {
+
+    // const calculateTotalCost = () => {
+    //     let totalCost = 0;
+    //     cart.forEach(cartitem => {
+    //         const days = calculateDays(cartitem.startDate, cartitem.endDate);
+    //         totalCost += days * cartitem.product.price;
+    //     });
+    //     return totalCost.toFixed(2);
+    // };
+
+    useEffect(() => {
+        if (cart.length > 0) {
+            setCartItems(cart);
+
+        }
+    }, [cart]);
+
+    const calculateTotalPriceForOneItem = (product, cart) => {
         let totalCost = 0;
-        cart.forEach(cartitem => {
-            const days = calculateDays(cartitem.startDate, cartitem.endDate);
-            totalCost += days * cartitem.product.price;
-        });
+        cart.map((cartitem, index) => {
+            if (product.id === cartitem.product.id){
+                const days = calculateDays(cartitem.startDate, cartitem.endDate);
+                totalCost += days * product.price;
+            }
+        })
+        
         return totalCost.toFixed(2);
     };
+
     const getStartDate = () => {
-        let startDate = "";  // Use let instead of const
+        let startDate = ""; 
         cart.forEach(cartitem => {
             startDate = cartitem.startDate;
         });
         return startDate;
     }
     const getEndDate = () => {
-        let endDate = "";  // Use let instead of const
+        let endDate = ""; 
         cart.forEach(cartitem => {
             endDate = cartitem.endDate;
         });
@@ -68,9 +90,6 @@ const RentStep2 = ({ setData, step2Next, productList, userId }) => {
             formData.address = input1.current.value;
             formData.city = input2.current.value;
         }
-
-
-        console.log("step2Data", formData);
         setData(formData);
         step2Next();
     }
@@ -96,13 +115,13 @@ const RentStep2 = ({ setData, step2Next, productList, userId }) => {
     return (
         <>
             <div className='confirm-cart-container' >
-                {productList.map((cartitem, index) => {    
+                {productList.map((product, index) => {    
                     return (
                         <div className='confirm-cart-item' style={{ gridTemplateColumns: '1fr 1fr 1fr' }} key={index}>
-                            <h3>{cartitem.name}</h3>
-                            <h3>€{calculateTotalCost()}</h3>
+                            <h3>{product.name}</h3>
+                            <h3>€{calculateTotalPriceForOneItem(product, cart)}</h3>
                            
-                            {cartitem.files.map((file, fileIndex) => {
+                            {product.files.map((file, fileIndex) => {
                                 console.log("file", file);
                                 return file.type.startsWith('image/') ? (
                                     <img src={file.url} alt={`Product File ${fileIndex}`} key={fileIndex} style={{ height: '110px', width: '140px' }} />

@@ -41,7 +41,7 @@ const RentStep1 = ({ step1Next }) => {
           return (
             <div className='confirm-cart-item' key={index}>
               <h3>{cartitem.name}</h3>
-              <h3>€{cartitem.price}</h3>
+              <h3>€{cartitem.price}/day</h3>
               {cartitem.files.map((file, fileIndex) => {
                 console.log("file", file);
                 return file.type.startsWith('image/') ? (
