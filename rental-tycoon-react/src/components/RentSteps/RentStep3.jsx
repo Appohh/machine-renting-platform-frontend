@@ -154,11 +154,10 @@ const RentStep3 = ({ step3Next, userId, productList, cart, rentInfo }) => {
             <div className={`confirm-cart-details confirm-cart-details-step3`}>
                 <h3>Deliver at my address</h3>
                 <h4>{user?.firstName} {user?.lastName}</h4>
-                {/* TODO: get selected adress details */}
                 <h4>{rentInfo?.address}, {rentInfo?.city}</h4>
             </div>
 
-            <div className='order-receipt-container'>
+            <div className='order-receipt-container' >
                 <h2>Price details</h2>
                 <div className='order-receipt'>
                     <h3>Products</h3>

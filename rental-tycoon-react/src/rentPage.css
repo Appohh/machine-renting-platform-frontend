@@ -17,6 +17,7 @@
     background: white;
     border-top: 10px solid #020a4d;
     padding: 1% 4%;
+    height: fit-content;
 }
 
 .confirm-cart-button-container button {
@@ -30,7 +31,8 @@
 .confirm-cart-item {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
-    background: #eff8ff;
+    /* background: #eff8ff; */
+    border-bottom: 1.3px solid black;
     border-radius: 8px;
     padding: 0 4%;
     align-items: center;
@@ -73,13 +75,13 @@
 }
 
 .confirm-cart-details-step3 {
-    height: 45%;
+    height: fit-content;
     cursor: unset;
 }
 
 img.detailCheckmark {
     position: absolute;
-    top: -12%;
+    top: -22px;
     background: white;
     right: -2%;
     border-radius: 41px;
@@ -140,6 +142,7 @@ h3.vat-total {
     background: white;
     border-top: 10px solid #020a4d;
     padding: 1% 4%;
+    height: fit-content;
 }
 
 .rent-step3-button {
@@ -198,4 +201,16 @@ h3.vat-total {
     display: flex;
     gap: 13px;
     align-items: center;
+}
+
+.checkbox-empty {
+    width: 43px;
+    height: 43px;
+    display: block;
+    position: absolute;
+    background: #cccaca;
+    top: -25px;
+    right: -2.1%;
+    border-radius: 10px;
+    box-shadow: 0.5px 0.5px 4px #00000078;
 }

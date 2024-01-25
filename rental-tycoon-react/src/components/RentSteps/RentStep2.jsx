@@ -49,24 +49,24 @@ const RentStep2 = ({ setData, step2Next, productList, userId }) => {
     const calculateTotalPriceForOneItem = (product, cart) => {
         let totalCost = 0;
         cart.map((cartitem, index) => {
-            if (product.id === cartitem.product.id){
+            if (product.id === cartitem.product.id) {
                 const days = calculateDays(cartitem.startDate, cartitem.endDate);
                 totalCost += days * product.price;
             }
         })
-        
+
         return totalCost.toFixed(2);
     };
 
     const getStartDate = () => {
-        let startDate = ""; 
+        let startDate = "";
         cart.forEach(cartitem => {
             startDate = cartitem.startDate;
         });
         return startDate;
     }
     const getEndDate = () => {
-        let endDate = ""; 
+        let endDate = "";
         cart.forEach(cartitem => {
             endDate = cartitem.endDate;
         });
@@ -115,12 +115,12 @@ const RentStep2 = ({ setData, step2Next, productList, userId }) => {
     return (
         <>
             <div className='confirm-cart-container' >
-                {productList.map((product, index) => {    
+                {productList.map((product, index) => {
                     return (
                         <div className='confirm-cart-item' style={{ gridTemplateColumns: '1fr 1fr 1fr' }} key={index}>
                             <h3>{product.name}</h3>
                             <h3>€{calculateTotalPriceForOneItem(product, cart)}</h3>
-                           
+
                             {product.files.map((file, fileIndex) => {
                                 console.log("file", file);
                                 return file.type.startsWith('image/') ? (
@@ -129,9 +129,9 @@ const RentStep2 = ({ setData, step2Next, productList, userId }) => {
                                     <video src={file.url} controls key={fileIndex} style={{ height: '110px', width: '140px' }} />
                                 ) : null;
                             })}
-                                <h4>Start Date: {getStartDate()}</h4> 
-                                <h4>End Date: {getEndDate()}</h4> 
-                            
+                            <h4>Start Date: {getStartDate()}</h4>
+                            <h4>End Date: {getEndDate()}</h4>
+
                         </div>
                     );
                 })}
@@ -139,9 +139,11 @@ const RentStep2 = ({ setData, step2Next, productList, userId }) => {
             <div className='confirm-cart-details-container'>
                 <div className='confirm-cart-details-wrap'>
                     <div
+
                         className={`confirm-cart-details ${selectedDiv === 0 ? 'selectedCartDetail' : ''}`}
                         onClick={() => handleDivClick(0)}
                     >
+                        <span className='checkbox-empty'></span>
                         <h3>Pick-up</h3>
                         {selectedDiv === 0 && <img src={checkMark} className="detailCheckmark" />}
                     </div>
@@ -149,6 +151,7 @@ const RentStep2 = ({ setData, step2Next, productList, userId }) => {
                         className={`confirm-cart-details ${selectedDiv === 1 ? 'selectedCartDetail' : ''}`}
                         onClick={() => handleDivClick(1)}
                     >
+                        <span className='checkbox-empty'></span>
                         <h3>Deliver at my adress</h3>
                         {selectedDiv === 1 && <img src={checkMark} className="detailCheckmark" />}
                         <h4>{user?.address}, {user?.city}</h4>
@@ -157,6 +160,7 @@ const RentStep2 = ({ setData, step2Next, productList, userId }) => {
                         className={`confirm-cart-details ${selectedDiv === 2 ? 'selectedCartDetail' : ''}`}
                         onClick={() => handleDivClick(2)}
                     >
+                        <span className='checkbox-empty'></span>
                         <h3>Deliver at specified adress</h3>
                         {selectedDiv === 2 && <img src={checkMark} className="detailCheckmark" />}
                         <form onSubmit={handleOnSubmitAdress} className='confirm-cart-details-inputs'>
