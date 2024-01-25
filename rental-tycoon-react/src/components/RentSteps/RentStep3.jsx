@@ -193,8 +193,20 @@ const RentStep3 = ({ step3Next, userId, productList, cart, rentInfo }) => {
                             <h3 className='receipt-discount'>€{discount}</h3>
                         </>
                     )}
-                    <h3>Total</h3>
-                    <h3>€{subtotal - discount}</h3>
+                    {discount <= 0 ? (
+                        <>
+                            <h3>Total</h3>
+                            <h3>€{subtotal}</h3>
+                        </>
+                    ) : (
+                        <>
+                            <h3>Total</h3>
+                            <div className='receipt-total-discounted'>
+                                <h3 style={{ color: '#3a893a', textShadow: '0px 0px 20px #000000cc', fontSize: '25px' }}>€{subtotal - discount}</h3>
+                                <h3 style={{ color: 'red', textDecoration: 'line-through' }}>€{subtotal}</h3>
+                            </div>
+                        </>
+                    )}
                 </div>
             </div>
             <div className='rent-step3-button'>
