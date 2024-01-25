@@ -6,6 +6,7 @@ import RentStep2 from '../components/RentSteps/RentStep2';
 import RentStep3 from '../components/RentSteps/RentStep3';
 import '../rentPage.css';
 import { useCart } from '../components/Cart/CartContext';
+import * as Email from 'smtpjs';
 
 
 const RentPage = () => {
@@ -22,14 +23,14 @@ const RentPage = () => {
     const { cart } = useCart();
     const [rentId, setRentId] = useState();
 
-    useEffect(() => {    
+    useEffect(() => {
         //retrieve token from localStorage
         const accessToken = localStorage.getItem('accessToken');
         setIsLoggedIn(accessToken !== null);
-        
-        
+
+
         if (accessToken) {
-            const tokenData = decodeToken(accessToken); 
+            const tokenData = decodeToken(accessToken);
             if (tokenData && tokenData.userId) {
                 setRentData({ ...rentData, customerId: tokenData.userId });
                 console.log("tokenData.userId", tokenData);
@@ -71,7 +72,7 @@ const RentPage = () => {
         rentData.discount = discount;
         rentData.customerId = userIdCurrent;
         delete rentData.products;
-    
+
         RentService.createRent(rentData)
             .then((response) => {
                 cartShadow.map((product) => {
@@ -81,16 +82,36 @@ const RentPage = () => {
                         endDate: product.endDate,
                         rentId: response.rentId
                     };
-    
+
                     RentService.addRentRow(rentRowData)
                         .then(() => { window.location.href = '/success'; });
                 });
             });
+
+
+        const handleSendEmail = () => {
+            const emailData = {
+                SecureToken: 'secure_token', 
+                To: '',
+                From: 'machine.rental.services@gmail.com',
+                Subject: 'Test Email',
+                Body: '',
+            };
+
+            Email.send(emailData).then(
+                message => alert(`Email sent successfully: ${message}`),
+                error => alert(`Error sending email: ${error}`)
+            );
+        };
+
+
+
+
     }
-        
+
 
     useEffect(() => {
-     console.log("Cart shadowwww: ", cartShadow)
+        console.log("Cart shadowwww: ", cartShadow)
     })
 
 
@@ -123,8 +144,8 @@ const RentPage = () => {
 
     return (
         <div>
-                <h1 style={{ marginLeft: '8%', width: '500px' }}>Rent Page</h1>
-                {renderRentStep()}
+            <h1 style={{ marginLeft: '8%', width: '500px' }}>Rent Page</h1>
+            {renderRentStep()}
         </div>
     );
 };

@@ -3,6 +3,7 @@ import UserService from '../../services/UserService.js'
 import { useCart } from '../Cart/CartContext';
 import RentService from '../../services/RentService.js';
 
+
 const RentStep3 = ({ step3Next, userId, productList, cart, rentInfo }) => {
     const [user, setUser] = useState(null);
     const [products, setProducts] = useState([]);
@@ -15,7 +16,7 @@ const RentStep3 = ({ step3Next, userId, productList, cart, rentInfo }) => {
     const [code, setCode] = useState("");
     const [responseCode, setResponseCode] = useState("");
     const [message, setMessage] = useState("");
-    
+
     const handleConfirmRent = () => {
         step3Next(totalPrice, discount);
     };
@@ -35,7 +36,7 @@ const RentStep3 = ({ step3Next, userId, productList, cart, rentInfo }) => {
                 setDiscount(data.discountAmount);
                 setResponseCode(data.code);
                 setCode("");
-                setMessage(""); 
+                setMessage("");
             }).catch(() => {
                 setDiscount(0);
                 setResponseCode(code)
@@ -104,14 +105,14 @@ const RentStep3 = ({ step3Next, userId, productList, cart, rentInfo }) => {
         try {
             const totalCost = parseFloat(calculateTotalCost());
             const deliveryCostValue = parseFloat(deliveryCost);
-    
+
             // Calculate VAT separately
             const vatValue = (totalCost + deliveryCostValue) * 0.2;
-    
+
             // Add VAT to totalCost and deliveryCost
             const totalWithVat = totalCost + vatValue;
             const subWithVatValue = totalWithVat + deliveryCostValue;
-    
+
             setTotalPrice(totalCost.toFixed(2));
             setVat(vatValue.toFixed(2));
             setSubtotal(subWithVatValue.toFixed(2));
@@ -119,12 +120,12 @@ const RentStep3 = ({ step3Next, userId, productList, cart, rentInfo }) => {
             console.error("Error in useEffect:", error);
         }
     }, [cartItems, deliveryCost]);
-    
-    
-    
-    
 
-    
+
+
+
+
+
 
     return (
         <>
@@ -142,9 +143,9 @@ const RentStep3 = ({ step3Next, userId, productList, cart, rentInfo }) => {
                                     <video src={file.url} controls key={fileIndex} style={{ height: '110px', width: '140px' }} />
                                 ) : null;
                             })}
-                            
-                            <h4>Start Date: {getStartDate()}</h4> 
-                                <h4>End Date: {getEndDate()}</h4> 
+
+                            <h4>Start Date: {getStartDate()}</h4>
+                            <h4>End Date: {getEndDate()}</h4>
                         </div>
                     );
                 })}
@@ -168,14 +169,14 @@ const RentStep3 = ({ step3Next, userId, productList, cart, rentInfo }) => {
                     <h3 className='sub-total'>Subtotal</h3>
                     <h3 className='sub-total'>€{subtotal}</h3>
                     <input
-                            type='text'
-                            id='discount-input'
-                            className='discount-input'
-                            placeholder='Enter discount code'
-                            value={code}
-                            onChange={(e) => {
-                                setCode(e.target.value);
-                            }}
+                        type='text'
+                        id='discount-input'
+                        className='discount-input'
+                        placeholder='Enter discount code'
+                        value={code}
+                        onChange={(e) => {
+                            setCode(e.target.value);
+                        }}
                     />
                     <button className='discount-submit' onClick={handleCreateDiscount}>Ok</button>
                     {message && (
@@ -185,13 +186,13 @@ const RentStep3 = ({ step3Next, userId, productList, cart, rentInfo }) => {
                         </>
                     )}
                     {discount !== 0 && (
-                            <>
-                                <button onClick={handleRemoveDiscount} className='receipt-remove-discount'>Remove discount code:</button>
-                                <button onClick={handleRemoveDiscount} className='receipt-remove-discount'> {responseCode}</button>
-                                <h3 className='receipt-discount'>Discount</h3>
-                                <h3 className='receipt-discount'>€{discount}</h3>
-                            </>
-                        )}
+                        <>
+                            <button onClick={handleRemoveDiscount} className='receipt-remove-discount' style={{ color: 'green' }}>Remove discount code:</button>
+                            <button onClick={handleRemoveDiscount} className='receipt-remove-discount' style={{ color: 'green' }}> {responseCode}</button>
+                            <h3 className='receipt-discount'>Discount</h3>
+                            <h3 className='receipt-discount'>€{discount}</h3>
+                        </>
+                    )}
                     <h3>Total</h3>
                     <h3>€{subtotal - discount}</h3>
                 </div>
