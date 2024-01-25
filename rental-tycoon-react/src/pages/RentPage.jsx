@@ -6,7 +6,6 @@ import RentStep2 from '../components/RentSteps/RentStep2';
 import RentStep3 from '../components/RentSteps/RentStep3';
 import '../rentPage.css';
 import { useCart } from '../components/Cart/CartContext';
-import * as Email from 'smtpjs';
 
 
 const RentPage = () => {
@@ -92,7 +91,7 @@ const RentPage = () => {
         const handleSendEmail = () => {
             const emailData = {
                 SecureToken: 'secure_token', 
-                To: '',
+                To: 'machine.rental.services@gmail.com',
                 From: 'machine.rental.services@gmail.com',
                 Subject: 'Test Email',
                 Body: '',
