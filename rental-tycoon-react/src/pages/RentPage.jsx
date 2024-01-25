@@ -93,8 +93,8 @@ const RentPage = () => {
 
                     RentService.addRentRow(rentRowData)
                         .then(() => {
-                            window.location.href = '/success';
                             handleSendEmail();
+                            window.location.href = '/success';
                         });
                 });
             });
