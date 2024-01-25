@@ -61,9 +61,6 @@ const RentStep3 = ({ step3Next, userId, productList, cart, rentInfo }) => {
         }
     }, [cart]);
 
-    useEffect(() => {
-        console.log("cartItems", cartItems);
-    }, [cartItems]);
 
     useEffect(() => {
         if (productList.length > 0) {
@@ -87,14 +84,14 @@ const RentStep3 = ({ step3Next, userId, productList, cart, rentInfo }) => {
         return (new Date(endDate) - new Date(startDate)) / (1000 * 60 * 60 * 24);
     };
     const getStartDate = () => {
-        let startDate = "";  // Use let instead of const
+        let startDate = ""; 
         cart.forEach(cartitem => {
             startDate = cartitem.startDate;
         });
         return startDate;
     }
     const getEndDate = () => {
-        let endDate = "";  // Use let instead of const
+        let endDate = "";  
         cart.forEach(cartitem => {
             endDate = cartitem.endDate;
         });
@@ -106,10 +103,8 @@ const RentStep3 = ({ step3Next, userId, productList, cart, rentInfo }) => {
             const totalCost = parseFloat(calculateTotalCost());
             const deliveryCostValue = parseFloat(deliveryCost);
 
-            // Calculate VAT separately
             const vatValue = (totalCost + deliveryCostValue) * 0.2;
 
-            // Add VAT to totalCost and deliveryCost
             const totalWithVat = totalCost + vatValue;
             const subWithVatValue = totalWithVat + deliveryCostValue;
 
@@ -120,12 +115,6 @@ const RentStep3 = ({ step3Next, userId, productList, cart, rentInfo }) => {
             console.error("Error in useEffect:", error);
         }
     }, [cartItems, deliveryCost]);
-
-
-
-
-
-
 
     return (
         <>
