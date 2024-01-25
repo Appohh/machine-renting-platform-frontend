@@ -14,6 +14,7 @@ import RegisterUser from "./pages/RegisterUser";
 import CartComponent from "./components/Cart/CartComponent";
 import RentDetails from "./pages/RentDetails";
 import ConfirmPage from "./pages/ConfirmPage";
+import AboutPage from "./pages/AboutPage";
 
 
 function App() {
@@ -39,6 +40,7 @@ function App() {
               <Route path="/History/:userId" element={<RentHistory />} />
               <Route path="/RentDetails" element={<RentDetails />} />
               <Route path="/Success" element={<ConfirmPage />} />
+              <Route path="/about" element={<AboutPage />} />
             </Routes>
           </div>
         </Router>

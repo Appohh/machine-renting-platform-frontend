@@ -36,7 +36,7 @@ function NavBar() {
         <ul><a href="/">Home</a></ul>
         <ul><a href="/catalog">Catalog</a></ul>
         <ul><img src={logo} alt="logo" style={{ height: '45px', borderRadius: '10px' }}></img></ul>
-        <ul><a href="/">About</a></ul>
+        <ul><a href="/about">About Us</a></ul>
         {!isLoggedIn ? (
           <ul><a href="/Login">Login</a></ul>
         ) : (
