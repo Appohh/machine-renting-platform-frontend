@@ -6,6 +6,7 @@ import RentStep2 from '../components/RentSteps/RentStep2';
 import RentStep3 from '../components/RentSteps/RentStep3';
 import '../rentPage.css';
 import { useCart } from '../components/Cart/CartContext';
+import UserService from '../services/UserService.js'
 
 
 const RentPage = () => {
@@ -21,6 +22,8 @@ const RentPage = () => {
     const [userIdCurrent, setUserIdCurrent] = useState(null);
     const { cart } = useCart();
     const [rentId, setRentId] = useState();
+    const [user, setUser] = useState(null);
+
 
     useEffect(() => {
         //retrieve token from localStorage
@@ -34,6 +37,12 @@ const RentPage = () => {
                 setRentData({ ...rentData, customerId: tokenData.userId });
                 console.log("tokenData.userId", tokenData);
                 setUserIdCurrent(tokenData.userId);
+
+                UserService.getUserById(tokenData.userId).then((data) => {
+                    setUser(data);
+                    console.log("user", data);
+                });
+
             } else {
                 console.log("tokenData.userId not found");
                 setIsLoggedIn(false);
@@ -83,31 +92,32 @@ const RentPage = () => {
                     };
 
                     RentService.addRentRow(rentRowData)
-                        .then(() => { window.location.href = '/success'; });
+                        .then(() => {
+                            window.location.href = '/success';
+                            handleSendEmail();
+                        });
                 });
             });
-
-
-        const handleSendEmail = () => {
-            const emailData = {
-                SecureToken: 'secure_token', 
-                To: 'machine.rental.services@gmail.com',
-                From: 'machine.rental.services@gmail.com',
-                Subject: 'Test Email',
-                Body: '',
-            };
-
-            Email.send(emailData).then(
-                message => alert(`Email sent successfully: ${message}`),
-                error => alert(`Error sending email: ${error}`)
-            );
-        };
-
-
-
-
     }
 
+    const handleSendEmail = () => {
+        const emailData = {
+            SecureToken: 'dc6affc8-f817-484b-baf3-381febbf12e0',
+            To: user.email,
+            From: 'machine.rental.services@gmail.com',
+            Subject: 'Order Confirmation',
+            Body: `Dear ${user.firstName},<br><br>
+        Thank you for your order! We are pleased to confirm your rental.<br><br>
+        If you have any questions or need further assistance, please feel free to contact us.<br><br>
+        Best regards,<br>
+        Machine Rental Services`,
+        };
+
+        Email.send(emailData).then(
+            message => alert(`Email sent successfully: ${message}`),
+            error => alert(`Error sending email: ${error}`)
+        );
+    };
 
     useEffect(() => {
         console.log("Cart shadowwww: ", cartShadow)
