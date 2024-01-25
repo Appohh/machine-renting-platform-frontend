@@ -55,6 +55,18 @@ const RentStep3 = ({ step3Next, userId, productList, cart, rentInfo }) => {
         setCode("");
     }
 
+    const calculateTotalPriceForOneItem = (product, cart) => {
+        let totalCost = 0;
+        cart.map((cartitem, index) => {
+            if (product.id === cartitem.product.id){
+                const days = calculateDays(cartitem.startDate, cartitem.endDate);
+                totalCost += days * product.price;
+            }
+        })
+        
+        return totalCost.toFixed(2);
+    };
+
     useEffect(() => {
         if (cart.length > 0) {
             setCartItems(cart);
@@ -123,7 +135,7 @@ const RentStep3 = ({ step3Next, userId, productList, cart, rentInfo }) => {
                     return (
                         <div className='confirm-cart-item' style={{ gridTemplateColumns: '1fr 1fr 1fr' }} key={index}>
                             <h3>{cartitem.name}</h3>
-                            <h3>€{calculateTotalCost()}</h3>
+                            <h3>€{calculateTotalPriceForOneItem(cartitem, cart)}</h3>
                             {cartitem.files.map((file, fileIndex) => {
                                 console.log("file", file);
                                 return file.type.startsWith('image/') ? (
